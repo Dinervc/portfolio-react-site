@@ -1,120 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useMemo, useState } from 'react'
 import './App.css'
+import { CommandNavigator } from './components/CommandNavigator'
+import { CommandOutput } from './components/CommandOutput'
+import { ContactPanel } from './components/ContactPanel'
+import { ProjectsGrid } from './components/ProjectsGrid'
+import { ShellFrame } from './components/ShellFrame'
+import { getPortfolioContent } from './lib/getPortfolioContent'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const content = useMemo(() => getPortfolioContent(), [])
+  const initialCommand = content.commands[0]?.command ?? ''
+  const [activeCommand, setActiveCommand] = useState(initialCommand)
+
+  const activeEntry =
+    content.commands.find((item) => item.command === activeCommand) ??
+    content.commands[0]
+
+  const prompt = `${content.profile.handle || 'user'}@portfolio`
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
+    <div className="terminal-page">
+      <main className="terminal-layout">
+        <header className="hero-panel">
+          <p className="hero-panel__role">{content.profile.role}</p>
+          <h1>{content.profile.name}</h1>
+          <p className="hero-panel__tagline">{content.profile.tagline}</p>
+          <ul className="hero-panel__meta">
+            <li>{content.profile.location}</li>
+            <li>{content.profile.availability}</li>
           </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        </header>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <ShellFrame title={content.shell.title}>
+          <div className="boot-sequence">
+            {content.shell.welcome?.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
+
+          <div className="shell-grid">
+            <CommandNavigator
+              prompt={prompt}
+              commands={content.commands}
+              activeCommand={activeCommand}
+              onSelect={setActiveCommand}
+            />
+            <CommandOutput prompt={prompt} entry={activeEntry} />
+          </div>
+        </ShellFrame>
+
+        <ShellFrame title={content.projectsSection.titleCommand}>
+          <ProjectsGrid
+            description={content.projectsSection.description}
+            projects={content.projects}
+          />
+        </ShellFrame>
+
+        <ShellFrame title={content.contactSection.titleCommand}>
+          <ContactPanel note={content.contactSection.note} contacts={content.contact} />
+        </ShellFrame>
+
+        <footer className="footer-note">{content.footer}</footer>
+      </main>
+    </div>
   )
 }
 

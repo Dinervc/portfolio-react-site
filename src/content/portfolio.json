@@ -1,0 +1,121 @@
+{
+  "profile": {
+    "name": "Your Name",
+    "handle": "yourname",
+    "role": "Frontend Engineer",
+    "location": "Zurich, Switzerland",
+    "availability": "Open to freelance + full-time roles",
+    "tagline": "I design and build expressive web experiences with product thinking and maintainable engineering."
+  },
+  "shell": {
+    "title": "portfolio.sh",
+    "welcome": [
+      "Booting profile runtime...done.",
+      "Select a command to inspect my work." 
+    ]
+  },
+  "commands": [
+    {
+      "command": "whoami",
+      "label": "Identity",
+      "description": "A quick snapshot of how I approach product and engineering.",
+      "output": [
+        "Product-minded builder focused on beautiful, usable interfaces.",
+        "I like fast feedback loops, clean architecture, and strong UX details.",
+        "Currently based in Zurich and collaborating remotely across Europe."
+      ],
+      "tags": ["React", "TypeScript", "Design Systems", "Performance"],
+      "cta": {
+        "label": "Download resume",
+        "href": "#"
+      }
+    },
+    {
+      "command": "skills --top",
+      "label": "Core Stack",
+      "description": "Tools and practices I use to ship consistently.",
+      "output": [
+        "Frontend: React, Next.js, Vite, modern CSS architecture.",
+        "Backend: Node.js, API integration, auth and data modeling.",
+        "Workflow: CI/CD, code review discipline, iterative delivery."
+      ],
+      "tags": ["React", "Node.js", "Vite", "CI/CD"]
+    },
+    {
+      "command": "now",
+      "label": "Current Focus",
+      "description": "What I care about most in current projects.",
+      "output": [
+        "Building conversion-focused web experiences with expressive motion.",
+        "Upgrading design systems for speed, consistency, and accessibility.",
+        "Mentoring teams on architecture choices that stay maintainable."
+      ],
+      "tags": ["Motion", "Accessibility", "DX", "Architecture"]
+    },
+    {
+      "command": "contact --open",
+      "label": "Availability",
+      "description": "Best way to start a conversation.",
+      "output": [
+        "Open to product engineering, frontend, and creative dev work.",
+        "Happy to discuss freelance projects, startup builds, or full-time roles.",
+        "Typical response time: under 24 hours."
+      ],
+      "tags": ["Freelance", "Full-Time", "Remote"]
+    }
+  ],
+  "projectsSection": {
+    "titleCommand": "ls projects/",
+    "description": "Selected projects. Replace these with your real work."
+  },
+  "projects": [
+    {
+      "name": "SignalDesk",
+      "year": "2025",
+      "description": "Analytics workspace for support and success teams with real-time filtering and live views.",
+      "stack": ["React", "TanStack Query", "Node.js"],
+      "link": "https://example.com"
+    },
+    {
+      "name": "LaunchPad Studio",
+      "year": "2024",
+      "description": "Marketing site platform with reusable sections, animation presets, and CMS integration.",
+      "stack": ["Next.js", "Framer Motion", "Headless CMS"],
+      "link": "https://example.com"
+    },
+    {
+      "name": "Clarity Portal",
+      "year": "2024",
+      "description": "Internal tooling redesign that cut onboarding friction and improved task completion rates.",
+      "stack": ["TypeScript", "Design System", "Storybook"],
+      "link": "https://example.com"
+    }
+  ],
+  "contactSection": {
+    "titleCommand": "cat contact.json",
+    "note": "JSON-powered contact block for easy updates."
+  },
+  "contact": [
+    {
+      "label": "email",
+      "value": "hello@example.com",
+      "href": "mailto:hello@example.com"
+    },
+    {
+      "label": "github",
+      "value": "github.com/yourname",
+      "href": "https://github.com/yourname"
+    },
+    {
+      "label": "linkedin",
+      "value": "linkedin.com/in/yourname",
+      "href": "https://linkedin.com/in/yourname"
+    },
+    {
+      "label": "x",
+      "value": "x.com/yourname",
+      "href": "https://x.com/yourname"
+    }
+  ],
+  "footer": "Built with React + Vite. Content lives in src/content/portfolio.json"
+}
