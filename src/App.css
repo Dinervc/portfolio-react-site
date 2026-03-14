@@ -736,6 +736,7 @@
   border: 1px solid rgba(86, 243, 167, 0.28);
   border-radius: 0.65rem;
   min-height: 8.4rem;
+  height: 8.4rem;
   background:
     radial-gradient(circle at 85% 20%, rgba(255, 179, 90, 0.2), transparent 44%),
     radial-gradient(circle at 15% 80%, rgba(86, 243, 167, 0.15), transparent 52%),
@@ -833,11 +834,12 @@
 }
 
 .stack-list {
-  margin: 0;
+  margin: auto 0 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.35rem;
 }
 
@@ -851,7 +853,8 @@
 }
 
 .project-card__actions {
-  margin-top: 0.15rem;
+  margin-top: 0;
+  padding-top: 0.15rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.45rem;
