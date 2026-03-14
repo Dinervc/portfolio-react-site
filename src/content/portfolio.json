@@ -3,8 +3,8 @@
     "name": "Adrian Petrovic",
     "handle": "dinervc",
     "role": "Computer Scientist & Full-Stack Developer",
-    "location": "Sarganserland, Switzerland",
-    "availability": "Open to full-time and part-time opportunities.",
+    "location": "Sarganserland, CH",
+    "availability": "Open to work",
     "tagline": "A passionate computer scientist based in Switzerland, focused on efficient software and modern product thinking."
   },
   "shell": {
@@ -126,7 +126,7 @@
       "proudnessScore": 1
     },
     {
-      "name": "Terminal Portfolio Website",
+      "name": "New Portfolio Website",
       "year": "2026",
       "description": "This portfolio website with a terminal-inspired interface, animated custom logo system, and structured content architecture.",
       "stack": [
@@ -237,7 +237,7 @@
       "proudnessScore": 2
     },
     {
-      "name": "Cool Encryption Tool (Grade 6)",
+      "name": "Cool Encryption Tool",
       "year": "2023",
       "description": "Python Tkinter desktop app for file encryption/decryption created as a school project.",
       "stack": [

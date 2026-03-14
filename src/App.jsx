@@ -8,17 +8,31 @@ import { ShellFrame } from './components/ShellFrame'
 import { TerminalLogo } from './components/TerminalLogo'
 import { getPortfolioContent } from './lib/getPortfolioContent'
 
+const SECRET_LOGO_TAPS = 5
+
 function App() {
   const content = useMemo(() => getPortfolioContent(), [])
   const initialCommand = content.commands[0]?.command ?? ''
   const [activeCommand, setActiveCommand] = useState(initialCommand)
   const [isHeroDocked, setIsHeroDocked] = useState(false)
+  const [logoTapCount, setLogoTapCount] = useState(0)
 
   const activeEntry =
     content.commands.find((item) => item.command === activeCommand) ??
     content.commands[0]
 
   const prompt = `${content.profile.handle || 'user'}@portfolio`
+  const isLogoStoryOpen = logoTapCount >= SECRET_LOGO_TAPS
+  const isLogoStoryRevealed = isLogoStoryOpen && !isHeroDocked
+
+  const onLogoSecretClick = () => {
+    if (isLogoStoryOpen) {
+      setLogoTapCount(0)
+      return
+    }
+
+    setLogoTapCount((value) => Math.min(value + 1, SECRET_LOGO_TAPS))
+  }
 
   useEffect(() => {
     const dockInTrigger = 92
@@ -73,8 +87,26 @@ function App() {
               </ul>
             </div>
 
-            <div className="hero-panel__logo">
-              <TerminalLogo />
+            <div className={`hero-panel__logo ${isLogoStoryRevealed ? 'is-story-open' : ''}`}>
+              <button
+                type="button"
+                className={`hero-logo-secret ${isLogoStoryRevealed ? 'is-revealed' : ''}`}
+                aria-label={isLogoStoryOpen ? 'Hide logo story' : 'Open logo story'}
+                onClick={onLogoSecretClick}
+              >
+                <div className="hero-logo-secret__inner">
+                  <div className="hero-logo-secret__face hero-logo-secret__face--front">
+                    <TerminalLogo />
+                  </div>
+                  <div className="hero-logo-secret__face hero-logo-secret__face--back">
+                    <span className="hero-logo-secret__title">Easter Egg found!</span>
+                    <span className="hero-logo-secret__body">
+                      This mark blends my initials with aluminum&apos;s 2-8-3 orbit structure. The metallic look reflects
+                      my focus on efficient, elegant, high-quality product craftsmanship.
+                    </span>
+                  </div>
+                </div>
+              </button>
             </div>
           </div>
         </header>

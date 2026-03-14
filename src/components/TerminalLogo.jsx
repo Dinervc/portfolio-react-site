@@ -55,18 +55,18 @@ export function TerminalLogo() {
       <svg className="terminal-logo__svg" viewBox="0 0 240 240" aria-hidden="true">
         <defs>
           <linearGradient id={primaryGradientId} x1="20" y1="28" x2="220" y2="215" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#6df7b4" />
-            <stop offset="55%" stopColor="#56f3a7" />
-            <stop offset="100%" stopColor="#ffbc72" />
+            <stop offset="0%" stopColor="#edf2f7" />
+            <stop offset="55%" stopColor="#bcc4cf" />
+            <stop offset="100%" stopColor="#8f98a5" />
           </linearGradient>
           <linearGradient id={atomGradientId} x1="45" y1="35" x2="202" y2="212" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="rgba(109, 247, 180, 0.92)" />
-            <stop offset="100%" stopColor="rgba(255, 188, 114, 0.9)" />
+            <stop offset="0%" stopColor="rgba(228, 234, 242, 0.92)" />
+            <stop offset="100%" stopColor="rgba(146, 156, 168, 0.9)" />
           </linearGradient>
           <radialGradient id={coreGradientId} cx="48%" cy="42%" r="62%">
-            <stop offset="0%" stopColor="rgba(109, 247, 180, 0.24)" />
-            <stop offset="55%" stopColor="rgba(86, 243, 167, 0.14)" />
-            <stop offset="100%" stopColor="rgba(255, 188, 114, 0.08)" />
+            <stop offset="0%" stopColor="rgba(226, 232, 240, 0.3)" />
+            <stop offset="55%" stopColor="rgba(165, 175, 188, 0.17)" />
+            <stop offset="100%" stopColor="rgba(120, 131, 146, 0.1)" />
           </radialGradient>
         </defs>
 
