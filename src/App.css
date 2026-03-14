@@ -10,9 +10,70 @@
   gap: 1rem;
 }
 
+.language-switcher {
+  position: fixed;
+  top: max(0.45rem, env(safe-area-inset-top));
+  right: max(0.45rem, env(safe-area-inset-right));
+  z-index: 1400;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.23rem;
+  border: 1px solid rgba(86, 243, 167, 0.28);
+  border-radius: 999px;
+  background: linear-gradient(140deg, rgba(12, 20, 33, 0.92), rgba(8, 14, 24, 0.95));
+  backdrop-filter: blur(4px);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.language-switcher__button {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  margin: 0;
+  padding: 0.26rem 0.56rem;
+  min-width: 2.45rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    color 170ms ease,
+    border-color 170ms ease,
+    background 170ms ease,
+    transform 170ms ease;
+}
+
+.language-switcher__button:hover {
+  color: var(--text-base);
+  border-color: rgba(86, 243, 167, 0.4);
+}
+
+.language-switcher__button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.language-switcher__button.is-active {
+  color: #03130f;
+  border-color: rgba(86, 243, 167, 0.6);
+  background: linear-gradient(135deg, rgba(124, 255, 191, 0.95), rgba(79, 226, 160, 0.95));
+}
+
+.language-switcher__button:active {
+  transform: translateY(1px);
+}
+
 .hero-shell {
   position: sticky;
   top: clamp(0.45rem, 1.5vw, 0.9rem);
+  width: 103%;
+  margin-inline: -1.5%;
   z-index: 1060;
 }
 
@@ -1063,6 +1124,18 @@
 @media (max-width: 40rem) {
   .terminal-page {
     padding: 1rem 0.6rem 1.5rem;
+  }
+
+  .language-switcher {
+    top: max(0.35rem, env(safe-area-inset-top));
+    right: max(0.35rem, env(safe-area-inset-right));
+    padding: 0.2rem;
+  }
+
+  .language-switcher__button {
+    min-width: 2.25rem;
+    font-size: 0.68rem;
+    padding: 0.24rem 0.5rem;
   }
 
   .hero-shell {

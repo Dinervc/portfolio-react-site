@@ -1,4 +1,51 @@
 {
+  "locale": "en",
+  "ui": {
+    "prompt": {
+      "fallbackHandle": "user",
+      "host": "portfolio"
+    },
+    "languageSwitcher": {
+      "ariaLabel": "Select language",
+      "enLabel": "EN",
+      "deLabel": "DE"
+    },
+    "commandNavigator": {
+      "ariaLabel": "Shell commands",
+      "helpCommand": "help"
+    },
+    "logo": {
+      "ariaLabel": "AP terminal emblem"
+    },
+    "logoStory": {
+      "openAriaLabel": "Open logo story",
+      "hideAriaLabel": "Hide logo story",
+      "title": "Easter Egg found!",
+      "body": "This mark blends my initials with aluminum's 2-8-3 orbit structure. The metallic look reflects my focus on efficient, elegant, high-quality product craftsmanship."
+    },
+    "shellFrame": {
+      "statusLive": "LIVE",
+      "statusMinimized": "MIN",
+      "statusPopup": "POP",
+      "closePopupAriaLabel": "Close popup view",
+      "closeSectionAriaLabel": "Close section",
+      "expandSectionAriaLabel": "Expand section",
+      "minimizeSectionAriaLabel": "Minimize section",
+      "openPopupAriaLabel": "Open popup mode",
+      "exitPopupAriaLabel": "Exit popup mode",
+      "redMessages": [
+        "Nice try.",
+        "You can't delete me.",
+        "Still not deletable.",
+        "Persistence detected."
+      ]
+    },
+    "projects": {
+      "openLabel": "Open project",
+      "codeLabel": "View code",
+      "privateLabel": "Private / Confidential"
+    }
+  },
   "profile": {
     "name": "Adrian Petrovic",
     "handle": "dinervc",
@@ -16,6 +63,7 @@
   },
   "commands": [
     {
+      "id": "identity",
       "command": "whoami",
       "label": "Identity",
       "description": "Quick background and motivation.",
@@ -36,12 +84,13 @@
       }
     },
     {
+      "id": "core-stack",
       "command": "skills --all",
       "label": "Core Stack",
       "description": "Current toolset and study focus.",
       "output": [
         "Core skills: Python, JavaScript (+TS), Swift, Java",
-        "Relevant Frameworks; Tkinter, React, Swift UIKit, etc...",
+        "Relevant frameworks: Tkinter, React, Swift UIKit, etc.",
         "Currently learning: Python.",
         "I prioritize robust architecture and practical delivery."
       ],
@@ -53,6 +102,7 @@
       ]
     },
     {
+      "id": "career-journey",
       "command": "career --timeline",
       "label": "Career Journey",
       "description": "Selected milestones.",
@@ -61,9 +111,9 @@
         "2023-08: Won Hack United with Reflectory.",
         "2024-08: Started internship at Staubli AG.",
         "2025-07: Finished computer science apprenticeship.",
-        "2024-08: Continued employment with 40% at Stäubli AG.",
-        "2026-02: Passed Passerele exam.",
-        "2026-04: Military recruitment (RS expecting to start in 2026)."
+        "2024-08: Continued employment with 40% at Staeubli AG.",
+        "2026-02: Passed Passerelle exam.",
+        "2026-04: Military recruitment (RS expected in 2026)."
       ],
       "tags": [
         "Education",
@@ -72,14 +122,15 @@
       ]
     },
     {
+      "id": "project-highlights",
       "command": "projects --highlights",
       "label": "Project Highlights",
       "description": "A few notable projects from my portfolio.",
       "output": [
         "HilRes: strong technical depth in HIL resource management with TDD.",
         "Reflectory: Hack United 2023 winner (Best Solo Hack).",
-        "RegBankSight and MessageLogger represent my recent technical Python GUI skills with many features and polish.",
-        "Projects below are ordered roughly from newer to older."
+        "RegBankSight and MessageLogger reflect recent Python GUI work with many features and polish.",
+        "Projects below are ordered by proudness score and then alphabetically."
       ],
       "tags": [
         "HilRes",
@@ -89,6 +140,7 @@
       ]
     },
     {
+      "id": "contact",
       "command": "contact --open",
       "label": "Contact",
       "description": "Public channels.",
@@ -139,7 +191,7 @@
         "open": "",
         "code": "https://github.com/Dinervc/portfolio-react-site"
       },
-      "proudnessScore": 1
+      "proudnessScore": 3
     },
     {
       "name": "IDPA - Staubli ChatGPT (Grade 5.5)",

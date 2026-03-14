@@ -1,6 +1,6 @@
 import { useId } from 'react'
 
-export function TerminalLogo() {
+export function TerminalLogo({ ariaLabel }) {
   const uid = useId().replace(/:/g, '')
   const primaryGradientId = `${uid}-primary`
   const atomGradientId = `${uid}-atom`
@@ -50,8 +50,12 @@ export function TerminalLogo() {
     },
   ]
 
+  const accessibilityProps = ariaLabel
+    ? { role: 'img', 'aria-label': ariaLabel }
+    : { 'aria-hidden': true }
+
   return (
-    <div className="terminal-logo" role="img" aria-label="AP terminal emblem">
+    <div className="terminal-logo" {...accessibilityProps}>
       <svg className="terminal-logo__svg" viewBox="0 0 240 240" aria-hidden="true">
         <defs>
           <linearGradient id={primaryGradientId} x1="20" y1="28" x2="220" y2="215" gradientUnits="userSpaceOnUse">

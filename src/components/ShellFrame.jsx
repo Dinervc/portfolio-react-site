@@ -1,12 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
 
-const RED_MESSAGES = [
-  'Nice try.',
-  "You can't delete me.",
-  'Still not deletable.',
-  'Persistence detected.',
-]
-
 function randomOffset() {
   return {
     x: Math.floor(Math.random() * 42) - 21,
@@ -16,7 +9,7 @@ function randomOffset() {
 
 const RED_IDLE_RESET_MS = 6800
 
-export function ShellFrame({ title, children }) {
+export function ShellFrame({ title, children, ui }) {
   const [isMinimized, setIsMinimized] = useState(false)
   const [isPopup, setIsPopup] = useState(false)
   const [redOffset, setRedOffset] = useState({ x: 0, y: 0 })
@@ -75,7 +68,12 @@ export function ShellFrame({ title, children }) {
     [],
   )
 
-  const statusLabel = isPopup ? 'POP' : isMinimized ? 'MIN' : 'LIVE'
+  const redMessages = Array.isArray(ui?.redMessages) ? ui.redMessages : []
+  const statusLabel = isPopup
+    ? ui?.statusPopup
+    : isMinimized
+      ? ui?.statusMinimized
+      : ui?.statusLive
 
   const onToggleMinimize = () => {
     if (isPopup) {
@@ -105,8 +103,12 @@ export function ShellFrame({ title, children }) {
   const onRedClick = () => {
     setRedAttempts((attempts) => {
       const nextAttempts = attempts + 1
-      const messageIndex = (nextAttempts - 1) % RED_MESSAGES.length
-      setFlashMessage(RED_MESSAGES[messageIndex])
+      if (redMessages.length > 0) {
+        const messageIndex = (nextAttempts - 1) % redMessages.length
+        setFlashMessage(redMessages[messageIndex])
+      } else {
+        setFlashMessage('')
+      }
       return nextAttempts
     })
 
@@ -135,7 +137,7 @@ export function ShellFrame({ title, children }) {
         <button
           type="button"
           className="shell-frame__backdrop"
-          aria-label="Close popup view"
+          aria-label={ui?.closePopupAriaLabel}
           onClick={() => setIsPopup(false)}
         />
       ) : null}
@@ -160,19 +162,19 @@ export function ShellFrame({ title, children }) {
                 '--offset-x': `${redOffset.x}px`,
                 '--offset-y': `${redOffset.y}px`,
               }}
-              aria-label="Close section"
+              aria-label={ui?.closeSectionAriaLabel}
               onClick={onRedClick}
             />
             <button
               type="button"
               className="shell-light shell-light--amber"
-              aria-label={isMinimized ? 'Expand section' : 'Minimize section'}
+              aria-label={isMinimized ? ui?.expandSectionAriaLabel : ui?.minimizeSectionAriaLabel}
               onClick={onToggleMinimize}
             />
             <button
               type="button"
               className="shell-light shell-light--green"
-              aria-label={isPopup ? 'Exit popup mode' : 'Open popup mode'}
+              aria-label={isPopup ? ui?.exitPopupAriaLabel : ui?.openPopupAriaLabel}
               onClick={onTogglePopup}
             />
           </div>

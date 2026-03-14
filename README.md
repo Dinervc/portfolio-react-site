@@ -5,6 +5,7 @@ Terminal-inspired portfolio website built with React + Vite.
 ## Highlights
 
 - Content-driven architecture: profile, shell commands, projects, and contact data are defined in JSON.
+- Built-in multilingual content support (`en` + `de`) with a top-right language switcher.
 - Interactive section windows with terminal-style controls.
 - Project cards with image overlays, hover effects, and optional action buttons.
 - Sticky/docking hero section with custom AP atom logo and hidden easter egg interaction.
@@ -36,11 +37,12 @@ npm run lint     # run eslint
 
 ## Content Management
 
-Main content source:
+Main content sources:
 
-- `src/content/portfolio.json`
+- `src/content/en.portfolio.json`
+- `src/content/de.portfolio.json`
 
-Important sections in the JSON:
+Important sections in each locale JSON:
 
 - `profile`: top hero content
 - `shell`: terminal window title + boot lines
@@ -49,6 +51,8 @@ Important sections in the JSON:
 - `projects`: project cards and links
 - `contactSection` / `contact`: contact panel
 - `footer`: footer note
+
+Language-specific UI strings are grouped under `ui` (labels, aria text, shell controls, and button text).
 
 Project image paths are defined directly in each project object via `image`, for example:
 

@@ -6,24 +6,64 @@ import { ContactPanel } from './components/ContactPanel'
 import { ProjectsGrid } from './components/ProjectsGrid'
 import { ShellFrame } from './components/ShellFrame'
 import { TerminalLogo } from './components/TerminalLogo'
-import { getPortfolioContent } from './lib/getPortfolioContent'
+import { DEFAULT_LOCALE, getPortfolioContent, resolveLocale } from './lib/getPortfolioContent'
 
 const SECRET_LOGO_TAPS = 5
+const LANGUAGE_STORAGE_KEY = 'portfolio-language'
+const LANGUAGE_CODES = ['en', 'de']
+
+function getInitialLocale() {
+  if (typeof window === 'undefined') {
+    return DEFAULT_LOCALE
+  }
+
+  try {
+    const storedLocale = window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
+    if (storedLocale) {
+      return resolveLocale(storedLocale)
+    }
+  } catch {
+    // Ignore localStorage access issues.
+  }
+
+  const browserLocale = window.navigator.language || window.navigator.languages?.[0] || ''
+  return resolveLocale(browserLocale)
+}
 
 function App() {
-  const content = useMemo(() => getPortfolioContent(), [])
-  const initialCommand = content.commands[0]?.command ?? ''
-  const [activeCommand, setActiveCommand] = useState(initialCommand)
+  const [locale, setLocale] = useState(getInitialLocale)
+  const content = useMemo(() => getPortfolioContent(locale), [locale])
+  const initialCommandId = content.commands[0]?.id || content.commands[0]?.command || ''
+  const [activeCommandId, setActiveCommandId] = useState(initialCommandId)
   const [isHeroDocked, setIsHeroDocked] = useState(false)
   const [logoTapCount, setLogoTapCount] = useState(0)
 
+  const resolvedActiveCommandId = content.commands.some(
+    (item) => (item.id || item.command) === activeCommandId,
+  )
+    ? activeCommandId
+    : content.commands[0]?.id || content.commands[0]?.command || ''
+
   const activeEntry =
-    content.commands.find((item) => item.command === activeCommand) ??
+    content.commands.find((item) => (item.id || item.command) === resolvedActiveCommandId) ??
     content.commands[0]
 
-  const prompt = `${content.profile.handle || 'user'}@portfolio`
+  const fallbackHandle = content.ui?.prompt?.fallbackHandle || ''
+  const promptHost = content.ui?.prompt?.host || ''
+  const promptHandle = content.profile.handle || fallbackHandle
+  const prompt = promptHost ? `${promptHandle}@${promptHost}` : promptHandle
   const isLogoStoryOpen = logoTapCount >= SECRET_LOGO_TAPS
   const isLogoStoryRevealed = isLogoStoryOpen && !isHeroDocked
+
+  useEffect(() => {
+    document.documentElement.lang = content.locale || locale
+
+    try {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, content.locale || locale)
+    } catch {
+      // Ignore localStorage access issues.
+    }
+  }, [content.locale, locale])
 
   const onLogoSecretClick = () => {
     if (isLogoStoryOpen) {
@@ -72,8 +112,34 @@ function App() {
     }
   }, [])
 
+  const languageSwitcher = content.ui?.languageSwitcher || {}
+  const commandNavigatorUi = content.ui?.commandNavigator || {}
+  const logoUi = content.ui?.logo || {}
+  const logoStory = content.ui?.logoStory || {}
+  const shellFrameUi = content.ui?.shellFrame || {}
+  const projectLabels = content.ui?.projects || {}
+
   return (
     <div className="terminal-page">
+      <div className="language-switcher" role="group" aria-label={languageSwitcher.ariaLabel}>
+        {LANGUAGE_CODES.map((code) => {
+          const label = code === 'en' ? languageSwitcher.enLabel : languageSwitcher.deLabel
+          const isActive = content.locale === code
+
+          return (
+            <button
+              key={code}
+              type="button"
+              className={`language-switcher__button ${isActive ? 'is-active' : ''}`}
+              aria-pressed={isActive}
+              onClick={() => setLocale(code)}
+            >
+              {label || code.toUpperCase()}
+            </button>
+          )
+        })}
+      </div>
+
       <main className="terminal-layout">
         <header className={`hero-shell ${isHeroDocked ? 'hero-shell--docked' : ''}`}>
           <div className="hero-panel">
@@ -91,19 +157,16 @@ function App() {
               <button
                 type="button"
                 className={`hero-logo-secret ${isLogoStoryRevealed ? 'is-revealed' : ''}`}
-                aria-label={isLogoStoryOpen ? 'Hide logo story' : 'Open logo story'}
+                aria-label={isLogoStoryOpen ? logoStory.hideAriaLabel : logoStory.openAriaLabel}
                 onClick={onLogoSecretClick}
               >
                 <div className="hero-logo-secret__inner">
                   <div className="hero-logo-secret__face hero-logo-secret__face--front">
-                    <TerminalLogo />
+                    <TerminalLogo ariaLabel={logoUi.ariaLabel} />
                   </div>
                   <div className="hero-logo-secret__face hero-logo-secret__face--back">
-                    <span className="hero-logo-secret__title">Easter Egg found!</span>
-                    <span className="hero-logo-secret__body">
-                      This mark blends my initials with aluminum&apos;s 2-8-3 orbit structure. The metallic look reflects
-                      my focus on efficient, elegant, high-quality product craftsmanship.
-                    </span>
+                    <span className="hero-logo-secret__title">{logoStory.title}</span>
+                    <span className="hero-logo-secret__body">{logoStory.body}</span>
                   </div>
                 </div>
               </button>
@@ -111,7 +174,7 @@ function App() {
           </div>
         </header>
 
-        <ShellFrame title={content.shell.title}>
+        <ShellFrame title={content.shell.title} ui={shellFrameUi}>
           <div className="boot-sequence">
             {content.shell.welcome?.map((line) => (
               <p key={line}>{line}</p>
@@ -122,21 +185,24 @@ function App() {
             <CommandNavigator
               prompt={prompt}
               commands={content.commands}
-              activeCommand={activeCommand}
-              onSelect={setActiveCommand}
+              activeCommandId={resolvedActiveCommandId}
+              onSelect={setActiveCommandId}
+              ariaLabel={commandNavigatorUi.ariaLabel}
+              helpCommand={commandNavigatorUi.helpCommand}
             />
             <CommandOutput prompt={prompt} entry={activeEntry} />
           </div>
         </ShellFrame>
 
-        <ShellFrame title={content.projectsSection.titleCommand}>
+        <ShellFrame title={content.projectsSection.titleCommand} ui={shellFrameUi}>
           <ProjectsGrid
             description={content.projectsSection.description}
             projects={content.projects}
+            labels={projectLabels}
           />
         </ShellFrame>
 
-        <ShellFrame title={content.contactSection.titleCommand}>
+        <ShellFrame title={content.contactSection.titleCommand} ui={shellFrameUi}>
           <ContactPanel note={content.contactSection.note} contacts={content.contact} />
         </ShellFrame>
 

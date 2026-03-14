@@ -1,17 +1,27 @@
-export function CommandNavigator({ prompt, commands, activeCommand, onSelect }) {
+export function CommandNavigator({
+  prompt,
+  commands,
+  activeCommandId,
+  onSelect,
+  ariaLabel,
+  helpCommand,
+}) {
+  const safeHelpCommand = helpCommand || ''
+
   return (
-    <aside className="command-nav" aria-label="Shell commands">
-      <p className="command-nav__hint">{prompt}:~$ help</p>
+    <aside className="command-nav" aria-label={ariaLabel}>
+      <p className="command-nav__hint">{prompt}:~$ {safeHelpCommand}</p>
       <ul className="command-nav__list">
         {commands.map((item) => {
-          const isActive = item.command === activeCommand
+          const commandId = item.id || item.command
+          const isActive = commandId === activeCommandId
 
           return (
-            <li key={item.command}>
+            <li key={commandId}>
               <button
                 type="button"
                 className={`command-nav__button ${isActive ? 'is-active' : ''}`}
-                onClick={() => onSelect(item.command)}
+                onClick={() => onSelect(commandId)}
               >
                 <span className="command-nav__command">$ {item.command}</span>
                 <span className="command-nav__label">{item.label}</span>

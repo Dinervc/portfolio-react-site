@@ -1,4 +1,8 @@
-export function ProjectsGrid({ description, projects }) {
+export function ProjectsGrid({ description, projects, labels }) {
+  const openLabel = labels?.openLabel || ''
+  const codeLabel = labels?.codeLabel || ''
+  const privateLabel = labels?.privateLabel || ''
+
   return (
     <section className="projects-panel">
       <p className="projects-panel__description">{description}</p>
@@ -27,7 +31,7 @@ export function ProjectsGrid({ description, projects }) {
             <div className="project-card__actions">
               {!project.links?.open && !project.links?.code ? (
                 <span className="project-action project-action--private project-action--full">
-                  Private / Confidential
+                  {privateLabel}
                 </span>
               ) : (
                 <>
@@ -38,7 +42,7 @@ export function ProjectsGrid({ description, projects }) {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Open project
+                      {openLabel}
                     </a>
                   ) : (
                     <span className="project-action project-action--empty" aria-hidden="true" />
@@ -51,7 +55,7 @@ export function ProjectsGrid({ description, projects }) {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      View code
+                      {codeLabel}
                     </a>
                   ) : (
                     <span className="project-action project-action--empty" aria-hidden="true" />
