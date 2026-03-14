@@ -46,6 +46,7 @@ export function TerminalLogo({ ariaLabel, params, style }) {
     repeatCount,
     shells,
     surfaceCssVars,
+    surfaceTheme,
     viewBoxSize,
   } = logoModel
 
@@ -56,9 +57,10 @@ export function TerminalLogo({ ariaLabel, params, style }) {
     ...surfaceCssVars,
     ...style,
   }
+  const logoClassName = `terminal-logo ${surfaceTheme?.radioactive ? 'is-radioactive' : ''}`
 
   return (
-    <div className="terminal-logo" {...accessibilityProps} style={mergedStyle}>
+    <div className={logoClassName} {...accessibilityProps} style={mergedStyle}>
       <svg className="terminal-logo__svg" viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`} aria-hidden="true">
         <defs>
           <GradientDef id={primaryGradientId} gradient={gradients?.primary} />

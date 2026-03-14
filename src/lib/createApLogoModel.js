@@ -15,6 +15,10 @@ const AP_LOGO_SURFACE_PRESETS = {
     electronGlow: 'rgba(205, 214, 224, 0.75)',
     scanline: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(192, 204, 218, 0.24), rgba(255, 255, 255, 0))',
     scanlineBlur: '7px',
+    radiationGlow: 'transparent',
+    radiationGlowDocked: 'transparent',
+    radiationInset: 'transparent',
+    radioactive: false,
   },
   gold: {
     border: 'rgba(224, 184, 104, 0.52)',
@@ -32,6 +36,10 @@ const AP_LOGO_SURFACE_PRESETS = {
     electronGlow: 'rgba(255, 222, 156, 0.86)',
     scanline: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 211, 126, 0.28), rgba(255, 255, 255, 0))',
     scanlineBlur: '7px',
+    radiationGlow: 'transparent',
+    radiationGlowDocked: 'transparent',
+    radiationInset: 'transparent',
+    radioactive: false,
   },
   graphite: {
     border: 'rgba(148, 158, 173, 0.44)',
@@ -49,6 +57,31 @@ const AP_LOGO_SURFACE_PRESETS = {
     electronGlow: 'rgba(198, 210, 226, 0.74)',
     scanline: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(173, 189, 210, 0.24), rgba(255, 255, 255, 0))',
     scanlineBlur: '7px',
+    radiationGlow: 'transparent',
+    radiationGlowDocked: 'transparent',
+    radiationInset: 'transparent',
+    radioactive: false,
+  },
+  uranium: {
+    border: 'rgba(126, 255, 156, 0.58)',
+    borderDocked: 'rgba(155, 255, 181, 0.68)',
+    innerBorder: 'rgba(182, 255, 199, 0.12)',
+    innerBorderDocked: 'rgba(200, 255, 214, 0.16)',
+    shadow: 'rgba(0, 0, 0, 0.45)',
+    shadowDocked: 'rgba(0, 0, 0, 0.51)',
+    bgHighlightA: 'rgba(133, 255, 170, 0.23)',
+    bgHighlightB: 'rgba(49, 178, 101, 0.24)',
+    bgStart: 'rgba(6, 24, 13, 0.95)',
+    bgEnd: 'rgba(3, 13, 7, 0.97)',
+    sheen: 'rgba(172, 255, 194, 0.32)',
+    glyphGlow: 'rgba(122, 255, 164, 0.56)',
+    electronGlow: 'rgba(156, 255, 188, 0.96)',
+    scanline: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(96, 255, 151, 0.3), rgba(255, 255, 255, 0))',
+    scanlineBlur: '8px',
+    radiationGlow: 'rgba(102, 255, 147, 0.52)',
+    radiationGlowDocked: 'rgba(119, 255, 161, 0.6)',
+    radiationInset: 'rgba(95, 255, 141, 0.16)',
+    radioactive: true,
   },
 }
 
@@ -59,6 +92,8 @@ const DEFAULT_AP_LOGO_PARAMS = {
   orbitFlatten: 0.47,
   orbitBaseRadius: 82,
   orbitStep: 8.5,
+  orbitPadding: 12,
+  autoFitOrbits: true,
   coreRadius: 66,
   syncedShellSpin: 360,
   syncedShellDuration: 30,
@@ -69,7 +104,7 @@ const DEFAULT_AP_LOGO_PARAMS = {
   defaultElectronDurStep: 1.8,
   defaultElectronStartOffset: 10,
   defaultElectronStartStep: 22,
-  baseOrbitAngles: [0, 60, -60, 30, -30, 90, -90],
+  baseOrbitAngles: [0, 60, -60, 30, -30, 90, 45, -45],
   repeatCount: 'indefinite',
   surfacePreset: 'silver',
   surfaceOverrides: {},
@@ -223,24 +258,64 @@ function distributeAngles(count, angleOffset = 0) {
   return Array.from({ length: safeCount }, (_, index) => angleOffset + step * index)
 }
 
+function normalizeAxisAngle(angle) {
+  const normalized = ((angle % 180) + 180) % 180
+  return normalized === 180 ? 0 : normalized
+}
+
+function hasAxisCollision(usedAxes, candidateAngle, epsilon = 0.35) {
+  const candidateAxis = normalizeAxisAngle(candidateAngle)
+
+  return usedAxes.some((axis) => {
+    const distance = Math.abs(axis - candidateAxis)
+    const wrappedDistance = Math.min(distance, 180 - distance)
+    return wrappedDistance < epsilon
+  })
+}
+
 function generateBaseOrbitAngles(count, preferredAngles = []) {
   const safeCount = normalizeElectronCount(count)
   if (safeCount === 0) {
     return []
   }
 
-  if (Array.isArray(preferredAngles) && preferredAngles.length >= safeCount) {
-    return preferredAngles.slice(0, safeCount)
+  const result = []
+  const usedAxes = []
+  const preferred = Array.isArray(preferredAngles)
+    ? preferredAngles.filter((angle) => Number.isFinite(angle))
+    : []
+
+  for (const angle of preferred) {
+    if (result.length >= safeCount) {
+      break
+    }
+
+    if (!hasAxisCollision(usedAxes, angle)) {
+      result.push(angle)
+      usedAxes.push(normalizeAxisAngle(angle))
+    }
   }
 
-  if (Array.isArray(preferredAngles) && preferredAngles.length > 0) {
-    return Array.from(
-      { length: safeCount },
-      (_, index) => preferredAngles[index % preferredAngles.length],
-    )
+  if (result.length < safeCount) {
+    const step = 180 / safeCount
+    let index = 0
+
+    while (result.length < safeCount && index < safeCount * 12) {
+      const angle = index * step
+      if (!hasAxisCollision(usedAxes, angle)) {
+        result.push(angle)
+        usedAxes.push(normalizeAxisAngle(angle))
+      }
+      index += 1
+    }
   }
 
-  return Array.from({ length: safeCount }, () => 0)
+  while (result.length < safeCount) {
+    const fallbackAngle = result.length * (180 / safeCount)
+    result.push(fallbackAngle)
+  }
+
+  return result
 }
 
 function createOrbitRadii(orbitConfig, orbitIndex, electronCount, params) {
@@ -311,6 +386,9 @@ function createSurfaceCssVars(surfaceTheme, center) {
     '--terminal-logo-electron-glow': surfaceTheme.electronGlow,
     '--terminal-logo-scanline': surfaceTheme.scanline,
     '--terminal-logo-scanline-blur': surfaceTheme.scanlineBlur,
+    '--terminal-logo-radiation-glow': surfaceTheme.radiationGlow,
+    '--terminal-logo-radiation-glow-docked': surfaceTheme.radiationGlowDocked,
+    '--terminal-logo-radiation-inset': surfaceTheme.radiationInset,
     '--terminal-logo-center-point': `${center}px ${center}px`,
   }
 }
@@ -324,13 +402,27 @@ function resolveSurfaceTheme(params) {
 
 export function createApLogoModel(overrides = {}) {
   const params = mergeDeep(DEFAULT_AP_LOGO_PARAMS, overrides)
-  const baseOrbitRadius = params.orbitBaseRadius * params.atomScale
-  const orbitStep = params.orbitStep * params.atomScale
   const surfaceTheme = resolveSurfaceTheme(params)
   const shellsSource =
     Array.isArray(params.orbits) && params.orbits.length > 0
       ? normalizeOrbits(params.orbits, params)
       : params.shells
+  const shellCount = Array.isArray(shellsSource) ? shellsSource.length : 0
+  let baseOrbitRadius = params.orbitBaseRadius * params.atomScale
+  let orbitStep = params.orbitStep * params.atomScale
+
+  if (params.autoFitOrbits && shellCount > 0) {
+    const maxOffset = Math.max(shellCount - 1, 0)
+    const viewLimit = params.viewBoxSize / 2 - params.orbitPadding
+    const maxOrbitRadius = Math.max(16, Math.min(viewLimit, params.center - params.orbitPadding))
+    const totalDesiredRadius = baseOrbitRadius + orbitStep * maxOffset
+
+    if (totalDesiredRadius > maxOrbitRadius) {
+      const fitScale = maxOrbitRadius / totalDesiredRadius
+      baseOrbitRadius *= fitScale
+      orbitStep *= fitScale
+    }
+  }
 
   const shells = (shellsSource || []).map((shell, index) => {
     const orbitOffsetSteps =

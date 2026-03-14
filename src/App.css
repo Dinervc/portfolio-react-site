@@ -348,7 +348,9 @@
     );
   box-shadow:
     inset 0 0 0 1px var(--terminal-logo-inner-border, rgba(255, 255, 255, 0.03)),
-    0 16px 30px var(--terminal-logo-shadow, rgba(0, 0, 0, 0.4));
+    inset 0 0 26px var(--terminal-logo-radiation-inset, transparent),
+    0 16px 30px var(--terminal-logo-shadow, rgba(0, 0, 0, 0.4)),
+    0 0 28px var(--terminal-logo-radiation-glow, transparent);
   overflow: hidden;
   transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
 }
@@ -357,7 +359,9 @@
   border-color: var(--terminal-logo-border-docked, rgba(226, 232, 240, 0.48));
   box-shadow:
     inset 0 0 0 1px var(--terminal-logo-inner-border-docked, rgba(255, 255, 255, 0.05)),
-    0 18px 34px var(--terminal-logo-shadow-docked, rgba(0, 0, 0, 0.44));
+    inset 0 0 28px var(--terminal-logo-radiation-inset, transparent),
+    0 18px 34px var(--terminal-logo-shadow-docked, rgba(0, 0, 0, 0.44)),
+    0 0 32px var(--terminal-logo-radiation-glow-docked, transparent);
 }
 
 .terminal-logo::before {
@@ -373,6 +377,10 @@
     transparent 1px,
     transparent 4px
   );
+}
+
+.terminal-logo.is-radioactive::before {
+  animation: logo-radiation-flicker 2.4s ease-in-out infinite;
 }
 
 .terminal-logo::after {
@@ -1094,6 +1102,22 @@
   100% {
     top: 110%;
     opacity: 0;
+  }
+}
+
+@keyframes logo-radiation-flicker {
+  0%,
+  100% {
+    opacity: 0.24;
+  }
+  20% {
+    opacity: 0.36;
+  }
+  54% {
+    opacity: 0.18;
+  }
+  76% {
+    opacity: 0.33;
   }
 }
 
