@@ -20,7 +20,7 @@
       "label": "Identity",
       "description": "Quick background and motivation.",
       "output": [
-        "Computer Science EFZ with Passerelle.",
+        "Computer Science EFZ + Passerelle.",
         "Long-term goal: complete higher education at ETH Zurich and work as a software engineer. Potential AI-/ML-specialisation.",
         "I enjoy building, breaking, and reimagining technology across software and hardware."
       ],
@@ -111,7 +111,7 @@
   "projects": [
     {
       "name": "IPA/LAP: HilRes (Grade 5.5)",
-      "year": "2023",
+      "year": "2025",
       "description": "Python module for managing Hardware-In-the-Loop resources to run tests in parallel with an extensible architecture and TDD workflow.",
       "stack": [
         "Python",
@@ -126,8 +126,24 @@
       "proudnessScore": 1
     },
     {
+      "name": "Terminal Portfolio Website",
+      "year": "2026",
+      "description": "This portfolio website with a terminal-inspired interface, animated custom logo system, and structured content architecture.",
+      "stack": [
+        "React",
+        "Vite",
+        "CSS"
+      ],
+      "image": "/project-images/ap_logo.webp",
+      "links": {
+        "open": "",
+        "code": "https://github.com/Dinervc/portfolio-react-site"
+      },
+      "proudnessScore": 1
+    },
+    {
       "name": "IDPA - Staubli ChatGPT (Grade 5.5)",
-      "year": "",
+      "year": "2024",
       "description": "Interdisciplinary apprenticeship project analyzing Staubli's in-house chatbot via interviews, surveys, and usage data to produce recommendations.",
       "stack": [
         "Research",
@@ -143,7 +159,7 @@
     },
     {
       "name": "RegBankSight",
-      "year": "",
+      "year": "2024",
       "description": "Application to visualize FPGA register banks in a tree structure with UART-based read/write access down to field level.",
       "stack": [
         "Python",
@@ -168,14 +184,14 @@
       ],
       "image": "/project-images/circleviz-BIKgNAsq.svg",
       "links": {
-        "open": "https://miro.medium.com/v2/resize:fit:651/1*aksFYLAhO-I85DST29svXQ.png",
+        "open": "",
         "code": ""
       },
       "proudnessScore": 4
     },
     {
       "name": "AI Arcade",
-      "year": "",
+      "year": "2025",
       "description": "Platform for AI-generated games with a library of 16 experiences ranging from simple skill games to complex 3D gameplay.",
       "stack": [
         "Web",
@@ -190,7 +206,7 @@
     },
     {
       "name": "SharcTestRunner",
-      "year": "",
+      "year": "2025/2026",
       "description": "Model-based test execution framework for HIL systems, including model import, Python conversion, execution, and issue reporting.",
       "stack": [
         "Python",
@@ -206,7 +222,7 @@
     },
     {
       "name": "TikTakToe (Grade 5.5)",
-      "year": "2022",
+      "year": "2024",
       "description": "TikTok-style social media clone built during apprenticeship with Swift and Firebase as a proof of full-featured mobile delivery.",
       "stack": [
         "Swift",
@@ -222,7 +238,7 @@
     },
     {
       "name": "Cool Encryption Tool (Grade 6)",
-      "year": "2022",
+      "year": "2023",
       "description": "Python Tkinter desktop app for file encryption/decryption created as a school project.",
       "stack": [
         "Python",
@@ -238,7 +254,7 @@
     },
     {
       "name": "Dinervc Lab",
-      "year": "2024",
+      "year": "2023",
       "description": "Portfolio experiment in Vue.js that demonstrated adaptability and quick learning in an unfamiliar framework.",
       "stack": [
         "Vue.js",
@@ -253,7 +269,7 @@
     },
     {
       "name": "ViewPeakClips",
-      "year": "",
+      "year": "2024",
       "description": "Tool for splitting long videos into social-ready clips with management and upload workflows.",
       "stack": [
         "Web",
@@ -285,7 +301,7 @@
     },
     {
       "name": "Dice Dash",
-      "year": "2021",
+      "year": "2023",
       "description": "Pig Dice-inspired browser game with multiplayer mode, strong AI opponent, custom settings, and immersive audio.",
       "stack": [
         "Game Dev",
@@ -316,7 +332,7 @@
     },
     {
       "name": "SlitherScript",
-      "year": "2020",
+      "year": "2023",
       "description": "Snake game variant with power-ups, dynamic walls, and tunable difficulty for varied gameplay sessions.",
       "stack": [
         "JavaScript",
