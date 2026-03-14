@@ -1,16 +1,78 @@
-# React + Vite
+# Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Terminal-inspired portfolio website built with React + Vite.
 
-Currently, two official plugins are available:
+## Highlights
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Content-driven architecture: profile, shell commands, projects, and contact data are defined in JSON.
+- Interactive section windows with terminal-style controls.
+- Project cards with image overlays, hover effects, and optional action buttons.
+- Sticky/docking hero section with custom AP atom logo and hidden easter egg interaction.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite 8
+- Plain CSS (component-scoped class structure)
+- ESLint 9
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Use a recent Node.js LTS version (recommended: Node 20+).
+
+```bash
+npm install
+npm run dev
+```
+
+Available scripts:
+
+```bash
+npm run dev      # start local dev server
+npm run build    # production build
+npm run preview  # preview production build locally
+npm run lint     # run eslint
+```
+
+## Content Management
+
+Main content source:
+
+- `src/content/portfolio.json`
+
+Important sections in the JSON:
+
+- `profile`: top hero content
+- `shell`: terminal window title + boot lines
+- `commands`: command list and output blocks
+- `projectsSection`: projects heading text
+- `projects`: project cards and links
+- `contactSection` / `contact`: contact panel
+- `footer`: footer note
+
+Project image paths are defined directly in each project object via `image`, for example:
+
+```json
+"/project-images/example.png"
+```
+
+Images should exist in:
+
+- `public/project-images/`
+
+### Project Sorting
+
+Projects are sorted in `src/lib/getPortfolioContent.js` using `proudnessScore`:
+
+- Ascending by score (smaller score appears first)
+- Scores below `1` are normalized to the same top level (`0`)
+- Projects with the same normalized score are sorted alphabetically by name
+
+## Deployment
+
+This app is Vercel-ready (standard Vite static build).
+
+## License
+
+This project is private and released under a restrictive, non-open license.
+See `LICENSE` for full terms.
