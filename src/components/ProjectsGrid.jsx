@@ -5,9 +5,17 @@ export function ProjectsGrid({ description, projects }) {
       <div className="projects-grid">
         {projects.map((project) => (
           <article key={project.name} className="project-card">
+            <div
+              className={`project-card__media-shell ${project.image ? 'has-image' : 'is-empty'}`}
+              style={project.image ? { '--project-image': `url(${project.image})` } : undefined}
+              aria-hidden="true"
+            >
+              <span className="project-card__media-fx" />
+            </div>
+
             <div className="project-card__header">
               <h3>{project.name}</h3>
-              <span>{project.year}</span>
+              {project.year ? <span>{project.year}</span> : null}
             </div>
             <p>{project.description}</p>
             <ul className="stack-list">
@@ -15,9 +23,42 @@ export function ProjectsGrid({ description, projects }) {
                 <li key={`${project.name}-${stackItem}`}>{stackItem}</li>
               ))}
             </ul>
-            <a href={project.link} target="_blank" rel="noreferrer">
-              Open project
-            </a>
+
+            <div className="project-card__actions">
+              {!project.links?.open && !project.links?.code ? (
+                <span className="project-action project-action--private project-action--full">
+                  Private / Confidential
+                </span>
+              ) : (
+                <>
+                  {project.links?.open ? (
+                    <a
+                      className="project-action"
+                      href={project.links.open}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Open project
+                    </a>
+                  ) : (
+                    <span className="project-action project-action--empty" aria-hidden="true" />
+                  )}
+
+                  {project.links?.code ? (
+                    <a
+                      className="project-action"
+                      href={project.links.code}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View code
+                    </a>
+                  ) : (
+                    <span className="project-action project-action--empty" aria-hidden="true" />
+                  )}
+                </>
+              )}
+            </div>
           </article>
         ))}
       </div>

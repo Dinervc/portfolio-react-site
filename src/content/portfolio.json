@@ -5,27 +5,31 @@
     "role": "Computer Scientist & Full-Stack Developer",
     "location": "Sarganserland, Switzerland",
     "availability": "Open to full-time and part-time opportunities.",
-    "tagline": "A passionate computer scientist based in Switzerland, dedicated to building efficient and innovative software solutions."
+    "tagline": "A passionate computer scientist based in Switzerland, focused on efficient software and modern product thinking."
   },
   "shell": {
     "title": "portfolio.sh",
     "welcome": [
       "Booting profile runtime...done.",
-      "Data migrated from dinervc.ch/about and dinervc.ch/projects."
+      "Select a command to inspect profile, skills, and project work."
     ]
   },
   "commands": [
     {
       "command": "whoami",
       "label": "Identity",
-      "description": "Quick background from my previous portfolio.",
+      "description": "Quick background and motivation.",
       "output": [
-        "Final-year computer science apprentice in Switzerland with full-stack focus.",
-        "Long-term goal: complete higher education at ETH Zurich and work as a software engineer.",
-        "I enjoy building, breaking, and reimagining technology across software and hardware.",
-        "Outside coding, I experiment with startups, collect vintage consoles, and build custom Game Boy projects."
+        "Computer Science EFZ with Passerelle.",
+        "Long-term goal: complete higher education at ETH Zurich and work as a software engineer. Potential AI-/ML-specialisation.",
+        "I enjoy building, breaking, and reimagining technology across software and hardware."
       ],
-      "tags": ["Full-Stack", "Computer Science", "Entrepreneurial", "Security Mindset"],
+      "tags": [
+        "Full-Stack",
+        "Computer Science",
+        "Entrepreneurial",
+        "Security Mindset"
+      ],
       "cta": {
         "label": "View LinkedIn",
         "href": "https://www.linkedin.com/in/adrianpetrovic"
@@ -34,167 +38,317 @@
     {
       "command": "skills --all",
       "label": "Core Stack",
-      "description": "Skills and current learning tracks from the old About page.",
+      "description": "Current toolset and study focus.",
       "output": [
-        "Core skills: Python, JS/TS, Swift, Java, C, React, Git, Bash, Microsoft Office.",
-        "Currently learning: Python, Swift, ESP32 electronics, C, and Passerelle prep.",
-        "I focus on robust architecture and practical delivery over hype."
+        "Core skills: Python, JavaScript (+TS), Swift, Java",
+        "Relevant Frameworks; Tkinter, React, Swift UIKit, etc...",
+        "Currently learning: Python.",
+        "I prioritize robust architecture and practical delivery."
       ],
-      "tags": ["Python", "JS/TS", "Swift", "Java", "C", "React", "Git", "Bash"]
+      "tags": [
+        "Python",
+        "JavaScript (+TS)",
+        "Swift",
+        "Java"
+      ]
     },
     {
       "command": "career --timeline",
       "label": "Career Journey",
-      "description": "Milestones copied from the old Career timeline.",
+      "description": "Selected milestones.",
       "output": [
-        "2019-08: Started computer science education.",
-        "2020-03: First school project, SlitherScript.",
-        "2021-04: Built Dice Dash.",
-        "2021-08: Started internship at Staubli AG.",
+        "2021-08: Started computer science education.",
         "2023-08: Won Hack United with Reflectory.",
-        "2023-12: Completed HilRes final apprenticeship project.",
-        "2024-01: Built Dinervc Lab portfolio in Vue."
+        "2024-08: Started internship at Staubli AG.",
+        "2025-07: Finished computer science apprenticeship.",
+        "2024-08: Continued employment with 40% at Stäubli AG.",
+        "2026-02: Passed Passerele exam.",
+        "2026-04: Military recruitment (RS expecting to start in 2026)."
       ],
-      "tags": ["Education", "Internship", "Hackathon", "Project Milestones"]
+      "tags": [
+        "Education",
+        "Internship",
+        "Hackathon"
+      ]
     },
     {
       "command": "projects --highlights",
       "label": "Project Highlights",
-      "description": "Highlights from the old Projects overview.",
+      "description": "A few notable projects from my portfolio.",
       "output": [
-        "HilRes: strongest technical depth and robust HIL architecture with TDD approach.",
+        "HilRes: strong technical depth in HIL resource management with TDD.",
         "Reflectory: Hack United 2023 winner (Best Solo Hack).",
-        "RegBankSight and Dice Dash were called out as noteworthy projects on the old site.",
-        "Project list below is ordered roughly from newer to older work."
+        "RegBankSight and MessageLogger represent my recent technical Python GUI skills with many features and polish.",
+        "Projects below are ordered roughly from newer to older."
       ],
-      "tags": ["HilRes", "Reflectory", "RegBankSight", "Dice Dash"]
+      "tags": [
+        "HilRes",
+        "Reflectory",
+        "RegBankSight",
+        "MessageLogger"
+      ]
     },
     {
       "command": "contact --open",
       "label": "Contact",
-      "description": "Public channels from the old About page.",
+      "description": "Public channels.",
       "output": [
         "Email: adrian@dinervc.ch",
         "LinkedIn: linkedin.com/in/adrianpetrovic",
         "GitHub: github.com/Dinervc"
       ],
-      "tags": ["Email", "LinkedIn", "GitHub"]
+      "tags": [
+        "Email",
+        "LinkedIn",
+        "GitHub"
+      ]
     }
   ],
   "projectsSection": {
     "titleCommand": "ls projects/",
-    "description": "Migrated from the old dinervc.ch/projects page."
+    "description": "Projects spanning apprenticeship work, hackathons, and side builds."
   },
   "projects": [
     {
-      "name": "HilRes",
+      "name": "IPA/LAP: HilRes (Grade 5.5)",
       "year": "2023",
-      "description": "Final apprenticeship project: a Python module to manage Hardware-In-the-Loop resources for parallel test execution with extensible architecture and TDD.",
-      "stack": ["Python", "HIL", "TDD"],
-      "link": "https://www.dinervc.ch/projects"
+      "description": "Python module for managing Hardware-In-the-Loop resources to run tests in parallel with an extensible architecture and TDD workflow.",
+      "stack": [
+        "Python",
+        "HIL",
+        "TDD"
+      ],
+      "image": "",
+      "links": {
+        "open": "",
+        "code": ""
+      },
+      "proudnessScore": 1
     },
     {
       "name": "IDPA - Staubli ChatGPT (Grade 5.5)",
-      "year": "n/a",
-      "description": "Interdisciplinary project analyzing Staubli's internal chatbot via interviews, surveys, and usage data to produce recommendations.",
-      "stack": ["Research", "Data Analysis", "Reporting"],
-      "link": "https://www.dinervc.ch/projects"
+      "year": "",
+      "description": "Interdisciplinary apprenticeship project analyzing Staubli's in-house chatbot via interviews, surveys, and usage data to produce recommendations.",
+      "stack": [
+        "Research",
+        "Data Analysis",
+        "Reporting"
+      ],
+      "image": "/project-images/staublichatgpt-q_gI6bdk.png",
+      "links": {
+        "open": "",
+        "code": ""
+      },
+      "proudnessScore": 1
     },
     {
       "name": "RegBankSight",
-      "year": "n/a",
-      "description": "Visualizes FPGA register banks in a tree structure and supports UART read/write interactions down to register field level.",
-      "stack": ["Python", "XML", "UART", "FPGA"],
-      "link": "https://www.dinervc.ch/projects"
+      "year": "",
+      "description": "Application to visualize FPGA register banks in a tree structure with UART-based read/write access down to field level.",
+      "stack": [
+        "Python",
+        "XML",
+        "UART",
+        "FPGA"
+      ],
+      "image": "/project-images/regbanksight-D_SKf5cI.png",
+      "links": {
+        "open": "",
+        "code": ""
+      },
+      "proudnessScore": 2
     },
     {
       "name": "CircleViz",
-      "year": "n/a",
-      "description": "Python tool that generates comparison circle diagrams similar to common AI model comparison visuals.",
-      "stack": ["Python", "Matplotlib"],
-      "link": "https://www.dinervc.ch/projects"
+      "year": "",
+      "description": "Python script that generates circle comparison diagrams inspired by popular AI model visual benchmarks.",
+      "stack": [
+        "Python",
+        "Matplotlib"
+      ],
+      "image": "/project-images/circleviz-BIKgNAsq.svg",
+      "links": {
+        "open": "https://miro.medium.com/v2/resize:fit:651/1*aksFYLAhO-I85DST29svXQ.png",
+        "code": ""
+      },
+      "proudnessScore": 4
     },
     {
       "name": "AI Arcade",
-      "year": "n/a",
-      "description": "Platform of AI-generated games, with a generated library of 16 experiences from simple challenges to complex 3D gameplay.",
-      "stack": ["Web", "AI Prototyping"],
-      "link": "https://github.com/Dinervc/ai_arcade"
+      "year": "",
+      "description": "Platform for AI-generated games with a library of 16 experiences ranging from simple skill games to complex 3D gameplay.",
+      "stack": [
+        "Web",
+        "AI Prototyping"
+      ],
+      "image": "/project-images/aiarcade-CDt0LadL.png",
+      "links": {
+        "open": "https://www.dinervc.ch/arcade",
+        "code": "https://github.com/Dinervc/ai_arcade"
+      },
+      "proudnessScore": 5
     },
     {
       "name": "SharcTestRunner",
-      "year": "n/a",
-      "description": "Model-based testing workflow for HIL systems at Staubli, including model import, Python conversion, execution, and reporting.",
-      "stack": ["Python", "HIL", "Model-Based Testing"],
-      "link": "https://www.dinervc.ch/projects"
+      "year": "",
+      "description": "Model-based test execution framework for HIL systems, including model import, Python conversion, execution, and issue reporting.",
+      "stack": [
+        "Python",
+        "HIL",
+        "Model-Based Testing"
+      ],
+      "image": "",
+      "links": {
+        "open": "",
+        "code": ""
+      },
+      "proudnessScore": 2
     },
     {
       "name": "TikTakToe (Grade 5.5)",
       "year": "2022",
-      "description": "TikTok-style social app clone built as apprenticeship project with Swift and Firebase.",
-      "stack": ["Swift", "Firebase", "Mobile"],
-      "link": "https://www.dinervc.ch/projects"
+      "description": "TikTok-style social media clone built during apprenticeship with Swift and Firebase as a proof of full-featured mobile delivery.",
+      "stack": [
+        "Swift",
+        "Firebase",
+        "Mobile"
+      ],
+      "image": "",
+      "links": {
+        "open": "",
+        "code": ""
+      },
+      "proudnessScore": 2
     },
     {
       "name": "Cool Encryption Tool (Grade 6)",
       "year": "2022",
-      "description": "Python Tkinter desktop app for file encryption and decryption, built as a school project.",
-      "stack": ["Python", "Tkinter", "Desktop"],
-      "link": "https://github.com/Dinervc/Cool-Encryption-Tool"
+      "description": "Python Tkinter desktop app for file encryption/decryption created as a school project.",
+      "stack": [
+        "Python",
+        "Tkinter",
+        "Desktop"
+      ],
+      "image": "/project-images/coolencryptiontool-CiOOV-be.png",
+      "links": {
+        "open": "",
+        "code": "https://github.com/Dinervc/Cool-Encryption-Tool"
+      },
+      "proudnessScore": 5
     },
     {
       "name": "Dinervc Lab",
       "year": "2024",
-      "description": "Portfolio experiment built in Vue.js to validate adaptability and rapid learning in a new framework.",
-      "stack": ["Vue.js", "Web"],
-      "link": "https://github.com/Dinervc/Dinervc-Lab"
+      "description": "Portfolio experiment in Vue.js that demonstrated adaptability and quick learning in an unfamiliar framework.",
+      "stack": [
+        "Vue.js",
+        "Web"
+      ],
+      "image": "/project-images/dinervclab-IqEgXtSS.png",
+      "links": {
+        "open": "https://www.dinervc.ch/",
+        "code": "https://github.com/Dinervc/Dinervc-Lab"
+      },
+      "proudnessScore": 4
     },
     {
       "name": "ViewPeakClips",
-      "year": "n/a",
-      "description": "Tool to split long videos into equal clips and manage social-media publishing workflows via dashboard.",
-      "stack": ["Web", "Automation", "Media"],
-      "link": "https://www.dinervc.ch/projects"
+      "year": "",
+      "description": "Tool for splitting long videos into social-ready clips with management and upload workflows.",
+      "stack": [
+        "Web",
+        "Automation",
+        "Media"
+      ],
+      "image": "",
+      "links": {
+        "open": "",
+        "code": ""
+      },
+      "proudnessScore": 4
     },
     {
       "name": "Reflectory (Hackathon Winner)",
       "year": "2023",
-      "description": "AI-powered mental health app built in one weekend for Hack United 2023, winning Best Solo Hack.",
-      "stack": ["AI", "Rapid Prototyping", "Product"],
-      "link": "https://github.com/Dinervc/Reflectory"
+      "description": "AI-powered mental health app built from scratch over one weekend, winning Best Solo Hack at Hack United 2023.",
+      "stack": [
+        "AI",
+        "Rapid Prototyping",
+        "Product"
+      ],
+      "image": "/project-images/certificate-NE65ZW3R.png",
+      "links": {
+        "open": "",
+        "code": "https://github.com/Dinervc/Reflectory"
+      },
+      "proudnessScore": 2
     },
     {
       "name": "Dice Dash",
       "year": "2021",
-      "description": "Pig Dice inspired game with two-player mode, strong AI opponent, immersive music, and custom settings.",
-      "stack": ["Game Dev", "JavaScript"],
-      "link": "https://github.com/Dinervc/DiceDash"
+      "description": "Pig Dice-inspired browser game with multiplayer mode, strong AI opponent, custom settings, and immersive audio.",
+      "stack": [
+        "Game Dev",
+        "JavaScript"
+      ],
+      "image": "/project-images/dicedash-BhiWuvh0.png",
+      "links": {
+        "open": "https://www.dinervc.ch/DiceDash/index.html",
+        "code": "https://github.com/Dinervc/DiceDash"
+      },
+      "proudnessScore": 3
     },
     {
       "name": "Webglide",
-      "year": "n/a",
-      "description": "Prompt-driven website generator concept built for startup exploration and school IDAF work.",
-      "stack": ["Web", "GPT", "Startup Prototype"],
-      "link": "https://www.dinervc.ch/projects"
+      "year": "",
+      "description": "Prompt-driven website generation concept created for startup exploration and school presentation work.",
+      "stack": [
+        "Web",
+        "GPT",
+        "Startup Prototype"
+      ],
+      "image": "",
+      "links": {
+        "open": "",
+        "code": ""
+      },
+      "proudnessScore": 4
     },
     {
       "name": "SlitherScript",
       "year": "2020",
-      "description": "Enhanced Snake game with power-ups, adjustable difficulty, and random obstacles.",
-      "stack": ["JavaScript", "Game Dev"],
-      "link": "https://github.com/Dinervc/SlitherScript"
+      "description": "Snake game variant with power-ups, dynamic walls, and tunable difficulty for varied gameplay sessions.",
+      "stack": [
+        "JavaScript",
+        "Game Dev"
+      ],
+      "image": "/project-images/slitherscript-q1Bf--zq.png",
+      "links": {
+        "open": "https://www.dinervc.ch/SlitherScript/index.html",
+        "code": "https://github.com/Dinervc/SlitherScript"
+      },
+      "proudnessScore": 4
     },
     {
       "name": "Die Gespenster von Demmin Reading Journal",
-      "year": "n/a",
-      "description": "Custom HTML/CSS reading journal concept with handcrafted visual style and custom font.",
-      "stack": ["HTML", "CSS", "Design"],
-      "link": "https://github.com/Dinervc/Die-Gespenster-von-Demmin-Lesejournal"
+      "year": "",
+      "description": "HTML/CSS reading journal concept with custom typography and visual design built for a school assignment.",
+      "stack": [
+        "HTML",
+        "CSS",
+        "Design"
+      ],
+      "image": "/project-images/lesejournal-D5Jcz4sw.png",
+      "links": {
+        "open": "https://www.dinervc.ch/LeseJournal/index.html",
+        "code": "https://github.com/Dinervc/Die-Gespenster-von-Demmin-Lesejournal"
+      },
+      "proudnessScore": 5
     }
   ],
   "contactSection": {
     "titleCommand": "cat contact.json",
-    "note": "Copied from the old About page contact section."
+    "note": "Feel free to reach out through any channel below."
   },
   "contact": [
     {
@@ -213,5 +367,5 @@
       "href": "https://www.linkedin.com/in/adrianpetrovic"
     }
   ],
-  "footer": "Migrated from dinervc.ch/about + dinervc.ch/projects into a JSON-driven React portfolio."
+  "footer": "Built with React + Vite."
 }
