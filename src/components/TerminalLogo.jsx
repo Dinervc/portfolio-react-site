@@ -1,80 +1,72 @@
 import { useId } from 'react'
+import { createApLogoModel } from '../lib/createApLogoModel'
 
-export function TerminalLogo({ ariaLabel }) {
+function GradientDef({ id, gradient }) {
+  const stops = Array.isArray(gradient?.stops) ? gradient.stops : []
+
+  if (gradient?.type === 'radial') {
+    return (
+      <radialGradient id={id} cx={gradient.cx} cy={gradient.cy} r={gradient.r}>
+        {stops.map((stop, index) => (
+          <stop key={`${id}-${index}`} {...stop} />
+        ))}
+      </radialGradient>
+    )
+  }
+
+  return (
+    <linearGradient
+      id={id}
+      x1={gradient?.x1}
+      y1={gradient?.y1}
+      x2={gradient?.x2}
+      y2={gradient?.y2}
+      gradientUnits={gradient?.gradientUnits}
+    >
+      {stops.map((stop, index) => (
+        <stop key={`${id}-${index}`} {...stop} />
+      ))}
+    </linearGradient>
+  )
+}
+
+export function TerminalLogo({ ariaLabel, params, style }) {
   const uid = useId().replace(/:/g, '')
   const primaryGradientId = `${uid}-primary`
   const atomGradientId = `${uid}-atom`
   const coreGradientId = `${uid}-core`
-  const atomScale = 1.1
-  const syncedShellDuration = 30
-  const syncedShellSpin = 360
-  const orbitFlatten = 0.47
-  const baseOrbitRadius = 82 * atomScale
-  const orbitStep = 8.5 * atomScale
-  const shells = [
-    {
-      key: 'k',
-      baseAngle: 0,
-      shellSpin: syncedShellSpin,
-      shellDur: syncedShellDuration,
-      orbitRadius: baseOrbitRadius,
-      electronStart: 10,
-      electronSpin: 360,
-      electronDur: 6.8,
-      angles: [0, 180],
-      radii: [3.5, 3.1],
-    },
-    {
-      key: 'l',
-      baseAngle: 60,
-      shellSpin: syncedShellSpin,
-      shellDur: syncedShellDuration,
-      orbitRadius: baseOrbitRadius + orbitStep,
-      electronStart: 32,
-      electronSpin: 360,
-      electronDur: 8.4,
-      angles: [0, 45, 90, 135, 180, 225, 270, 315],
-      radii: [3.2, 3, 2.9, 2.8, 3.1, 2.8, 3, 2.9],
-    },
-    {
-      key: 'm',
-      baseAngle: -60,
-      shellSpin: syncedShellSpin,
-      shellDur: syncedShellDuration,
-      orbitRadius: baseOrbitRadius + orbitStep * 2,
-      electronStart: -26,
-      electronSpin: 360,
-      electronDur: 10.6,
-      angles: [30, 150, 270],
-      radii: [3.3, 3, 2.9],
-    },
-  ]
+  const logoModel = createApLogoModel(params)
+  const {
+    atomScale,
+    center,
+    coreRadius,
+    gradients,
+    glyphPaths,
+    orbitFlatten,
+    repeatCount,
+    shells,
+    surfaceCssVars,
+    viewBoxSize,
+  } = logoModel
 
   const accessibilityProps = ariaLabel
     ? { role: 'img', 'aria-label': ariaLabel }
     : { 'aria-hidden': true }
+  const mergedStyle = {
+    ...surfaceCssVars,
+    ...style,
+  }
 
   return (
-    <div className="terminal-logo" {...accessibilityProps}>
-      <svg className="terminal-logo__svg" viewBox="0 0 240 240" aria-hidden="true">
+    <div className="terminal-logo" {...accessibilityProps} style={mergedStyle}>
+      <svg className="terminal-logo__svg" viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`} aria-hidden="true">
         <defs>
-          <linearGradient id={primaryGradientId} x1="20" y1="28" x2="220" y2="215" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#edf2f7" />
-            <stop offset="55%" stopColor="#bcc4cf" />
-            <stop offset="100%" stopColor="#8f98a5" />
-          </linearGradient>
-          <linearGradient id={atomGradientId} x1="45" y1="35" x2="202" y2="212" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="rgba(228, 234, 242, 0.92)" />
-            <stop offset="100%" stopColor="rgba(146, 156, 168, 0.9)" />
-          </linearGradient>
-          <radialGradient id={coreGradientId} cx="48%" cy="42%" r="62%">
-            <stop offset="0%" stopColor="rgba(226, 232, 240, 0.3)" />
-            <stop offset="55%" stopColor="rgba(165, 175, 188, 0.17)" />
-            <stop offset="100%" stopColor="rgba(120, 131, 146, 0.1)" />
-          </radialGradient>
+          <GradientDef id={primaryGradientId} gradient={gradients?.primary} />
+          <GradientDef id={atomGradientId} gradient={gradients?.atom} />
+          <GradientDef id={coreGradientId} gradient={gradients?.core} />
         </defs>
 
-        <circle className="terminal-logo__core" cx="120" cy="120" r={66 * atomScale} fill={`url(#${coreGradientId})`} />
+        <circle className="terminal-logo__core" cx={center} cy={center} r={coreRadius} fill={`url(#${coreGradientId})`} />
 
         <g className="terminal-logo__atom" stroke={`url(#${atomGradientId})`} fill="none">
           {shells.map((shell) => (
@@ -82,12 +74,12 @@ export function TerminalLogo({ ariaLabel }) {
               <animateTransform
                 attributeName="transform"
                 type="rotate"
-                from={`${shell.baseAngle} 120 120`}
-                to={`${shell.baseAngle + shell.shellSpin} 120 120`}
+                from={`${shell.baseAngle} ${center} ${center}`}
+                to={`${shell.baseAngle + shell.shellSpin} ${center} ${center}`}
                 dur={`${shell.shellDur}s`}
-                repeatCount="indefinite"
+                repeatCount={repeatCount}
               />
-              <g transform="translate(120 120)">
+              <g transform={`translate(${center} ${center})`}>
                 <g transform={`scale(1 ${orbitFlatten})`}>
                   <ellipse className="terminal-logo__orbit-line" cx="0" cy="0" rx={shell.orbitRadius} ry={shell.orbitRadius} />
                 </g>
@@ -103,10 +95,9 @@ export function TerminalLogo({ ariaLabel }) {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M84 168L112 78" />
-          <path d="M112 78L140 168" />
-          <path d="M98 132H128" />
-          <path d="M112 78H134C149 78 158 88 158 104C158 120 148 132 134 132C131 132 129 132 126 131" />
+          {glyphPaths.map((path) => (
+            <path key={path} d={path} />
+          ))}
         </g>
 
         <g className="terminal-logo__electrons" fill={`url(#${primaryGradientId})`}>
@@ -115,31 +106,37 @@ export function TerminalLogo({ ariaLabel }) {
               <animateTransform
                 attributeName="transform"
                 type="rotate"
-                from={`${shell.baseAngle} 120 120`}
-                to={`${shell.baseAngle + shell.shellSpin} 120 120`}
+                from={`${shell.baseAngle} ${center} ${center}`}
+                to={`${shell.baseAngle + shell.shellSpin} ${center} ${center}`}
                 dur={`${shell.shellDur}s`}
-                repeatCount="indefinite"
+                repeatCount={repeatCount}
               />
-              <g transform="translate(120 120)">
+              <g transform={`translate(${center} ${center})`}>
                 <g transform={`scale(1 ${orbitFlatten})`}>
                   <g className="terminal-logo__electron-runner">
-                    {shell.angles.map((angle, index) => (
-                      <circle
-                        key={`${shell.key}-${angle}`}
-                        className="terminal-logo__electron"
-                        cx={shell.orbitRadius}
-                        cy="0"
-                        r={shell.radii[index] * atomScale}
-                        transform={`rotate(${angle})`}
-                      />
-                    ))}
+                    {shell.angles.map((angle, index) => {
+                      // If radii length does not match angles, fall back to the last radius.
+                      const fallbackRadius = shell.radii[shell.radii.length - 1] ?? 1
+                      const electronRadius = shell.radii[index] ?? fallbackRadius
+
+                      return (
+                        <circle
+                          key={`${shell.key}-${angle}`}
+                          className="terminal-logo__electron"
+                          cx={shell.orbitRadius}
+                          cy="0"
+                          r={electronRadius * atomScale}
+                          transform={`rotate(${angle})`}
+                        />
+                      )
+                    })}
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
                       from={`${shell.electronStart} 0 0`}
                       to={`${shell.electronStart + shell.electronSpin} 0 0`}
                       dur={`${shell.electronDur}s`}
-                      repeatCount="indefinite"
+                      repeatCount={repeatCount}
                     />
                   </g>
                 </g>

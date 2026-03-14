@@ -336,24 +336,28 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border: 1px solid rgba(191, 200, 212, 0.46);
+  border: 1px solid var(--terminal-logo-border, rgba(191, 200, 212, 0.46));
   border-radius: 1rem;
   background:
-    radial-gradient(circle at 75% 20%, rgba(222, 228, 236, 0.26), transparent 58%),
-    radial-gradient(circle at 10% 88%, rgba(152, 163, 177, 0.24), transparent 55%),
-    linear-gradient(155deg, rgba(9, 16, 28, 0.95), rgba(5, 10, 19, 0.96));
+    radial-gradient(circle at 75% 20%, var(--terminal-logo-bg-glint-a, rgba(222, 228, 236, 0.26)), transparent 58%),
+    radial-gradient(circle at 10% 88%, var(--terminal-logo-bg-glint-b, rgba(152, 163, 177, 0.24)), transparent 55%),
+    linear-gradient(
+      155deg,
+      var(--terminal-logo-bg-start, rgba(9, 16, 28, 0.95)),
+      var(--terminal-logo-bg-end, rgba(5, 10, 19, 0.96))
+    );
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 16px 30px rgba(0, 0, 0, 0.4);
+    inset 0 0 0 1px var(--terminal-logo-inner-border, rgba(255, 255, 255, 0.03)),
+    0 16px 30px var(--terminal-logo-shadow, rgba(0, 0, 0, 0.4));
   overflow: hidden;
   transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
 }
 
 .hero-shell--docked .terminal-logo {
-  border-color: rgba(226, 232, 240, 0.48);
+  border-color: var(--terminal-logo-border-docked, rgba(226, 232, 240, 0.48));
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 18px 34px rgba(0, 0, 0, 0.44);
+    inset 0 0 0 1px var(--terminal-logo-inner-border-docked, rgba(255, 255, 255, 0.05)),
+    0 18px 34px var(--terminal-logo-shadow-docked, rgba(0, 0, 0, 0.44));
 }
 
 .terminal-logo::before {
@@ -377,7 +381,7 @@
   inset: 0;
   pointer-events: none;
   border-radius: inherit;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.2), transparent 70%);
+  background: linear-gradient(120deg, transparent 30%, var(--terminal-logo-sheen, rgba(255, 255, 255, 0.2)), transparent 70%);
   transform: translateX(-140%);
   transition: transform 420ms ease;
 }
@@ -386,14 +390,14 @@
   width: 100%;
   height: 100%;
   display: block;
-  filter: drop-shadow(0 0 18px rgba(181, 194, 210, 0.28));
+  filter: drop-shadow(0 0 18px var(--terminal-logo-glyph-glow, rgba(181, 194, 210, 0.28)));
   transform: translateZ(0) scale(1);
   transition: transform 260ms ease, filter 260ms ease;
 }
 
 .terminal-logo__core {
   opacity: 0.9;
-  transform-origin: 120px 120px;
+  transform-origin: var(--terminal-logo-center-point, 120px 120px);
   animation: logo-core-breathe 3.6s ease-in-out infinite;
 }
 
@@ -420,7 +424,7 @@
 .terminal-logo__glyph {
   stroke-width: 9.5;
   opacity: 0.96;
-  transform-origin: 120px 120px;
+  transform-origin: var(--terminal-logo-center-point, 120px 120px);
   animation: logo-glyph-pulse 3.2s ease-in-out infinite;
 }
 
@@ -433,7 +437,7 @@
 }
 
 .terminal-logo__electron {
-  filter: drop-shadow(0 0 10px rgba(205, 214, 224, 0.75));
+  filter: drop-shadow(0 0 10px var(--terminal-logo-electron-glow, rgba(205, 214, 224, 0.75)));
 }
 
 .terminal-logo__scanline {
@@ -441,13 +445,16 @@
   left: 10%;
   right: 10%;
   height: 26%;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    rgba(192, 204, 218, 0.24),
-    rgba(255, 255, 255, 0)
+  background: var(
+    --terminal-logo-scanline,
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(192, 204, 218, 0.24),
+      rgba(255, 255, 255, 0)
+    )
   );
-  filter: blur(7px);
+  filter: blur(var(--terminal-logo-scanline-blur, 7px));
   animation: logo-scan 3s linear infinite;
   pointer-events: none;
 }

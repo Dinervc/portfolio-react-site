@@ -195,7 +195,7 @@ function App() {
         >
           <div className="hero-logo-secret__inner">
             <div className="hero-logo-secret__face hero-logo-secret__face--front">
-              <TerminalLogo ariaLabel={logoUi.ariaLabel} />
+              <TerminalLogo ariaLabel={logoUi.ariaLabel} params={logoUi.params} />
             </div>
             <div className="hero-logo-secret__face hero-logo-secret__face--back">
               <span className="hero-logo-secret__title">{logoStory.title}</span>

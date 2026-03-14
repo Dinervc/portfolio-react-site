@@ -15,7 +15,11 @@
       "helpCommand": "help"
     },
     "logo": {
-      "ariaLabel": "AP terminal emblem"
+      "ariaLabel": "AP terminal emblem",
+      "params": {
+        "orbits": [2, 8, 3],
+        "surfacePreset": "silver"
+      }
     },
     "logoStory": {
       "openAriaLabel": "Open logo story",
