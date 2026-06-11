@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { CommandNavigator } from './components/CommandNavigator'
 import { CommandOutput } from './components/CommandOutput'
@@ -11,7 +11,6 @@ import { DEFAULT_LOCALE, getPortfolioContent, resolveLocale } from './lib/getPor
 const SECRET_LOGO_TAPS = 5
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const LANGUAGE_CODES = ['en', 'de']
-const HERO_DOCK_LOCK_MS = 240
 
 function getInitialLocale() {
   if (typeof window === 'undefined') {
@@ -36,10 +35,7 @@ function App() {
   const content = useMemo(() => getPortfolioContent(locale), [locale])
   const initialCommandId = content.commands[0]?.id || content.commands[0]?.command || ''
   const [activeCommandId, setActiveCommandId] = useState(initialCommandId)
-  const [isHeroDocked, setIsHeroDocked] = useState(false)
   const [logoTapCount, setLogoTapCount] = useState(0)
-  const [heroPlaceholderHeight, setHeroPlaceholderHeight] = useState(0)
-  const heroShellRef = useRef(null)
 
   const resolvedActiveCommandId = content.commands.some(
     (item) => (item.id || item.command) === activeCommandId,
@@ -56,7 +52,6 @@ function App() {
   const promptHandle = content.profile.handle || fallbackHandle
   const prompt = promptHost ? `${promptHandle}@${promptHost}` : promptHandle
   const isLogoStoryOpen = logoTapCount >= SECRET_LOGO_TAPS
-  const isLogoStoryRevealed = isLogoStoryOpen && !isHeroDocked
 
   useEffect(() => {
     document.documentElement.lang = content.locale || locale
@@ -77,140 +72,12 @@ function App() {
     setLogoTapCount((value) => Math.min(value + 1, SECRET_LOGO_TAPS))
   }
 
-  useEffect(() => {
-    const dockInTrigger = 92
-    const dockOutTrigger = 58
-    let rafId = 0
-    let lockUntil = 0
-    let lastScrollY = Math.max(window.scrollY, 0)
-
-    const updateDockState = (force = false) => {
-      const currentScrollY = Math.max(window.scrollY, 0)
-      const scrollDelta = currentScrollY - lastScrollY
-      const isMovingDown = scrollDelta > 0.4
-      const isMovingUp = scrollDelta < -0.4
-      lastScrollY = currentScrollY
-
-      setIsHeroDocked((previousValue) => {
-        if (force) {
-          return currentScrollY >= dockInTrigger
-        }
-
-        if (Date.now() < lockUntil) {
-          return previousValue
-        }
-
-        if (!previousValue && isMovingDown && currentScrollY >= dockInTrigger) {
-          lockUntil = Date.now() + HERO_DOCK_LOCK_MS
-          return true
-        }
-
-        if (previousValue && isMovingUp && currentScrollY <= dockOutTrigger) {
-          lockUntil = Date.now() + HERO_DOCK_LOCK_MS
-          return false
-        }
-
-        return previousValue
-      })
-      rafId = 0
-    }
-
-    const onScroll = () => {
-      if (rafId !== 0) {
-        return
-      }
-
-      rafId = window.requestAnimationFrame(() => updateDockState(false))
-    }
-
-    updateDockState(true)
-    window.addEventListener('scroll', onScroll, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      if (rafId !== 0) {
-        window.cancelAnimationFrame(rafId)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    const heroElement = heroShellRef.current
-    if (!heroElement) {
-      return undefined
-    }
-
-    const updateNaturalHeight = () => {
-      if (isHeroDocked) {
-        return
-      }
-
-      const measuredHeight = Math.ceil(heroElement.getBoundingClientRect().height)
-      if (measuredHeight > 0) {
-        setHeroPlaceholderHeight(measuredHeight)
-      }
-    }
-
-    updateNaturalHeight()
-
-    if (typeof window.ResizeObserver === 'undefined') {
-      window.addEventListener('resize', updateNaturalHeight)
-
-      return () => {
-        window.removeEventListener('resize', updateNaturalHeight)
-      }
-    }
-
-    const resizeObserver = new window.ResizeObserver(updateNaturalHeight)
-    resizeObserver.observe(heroElement)
-    window.addEventListener('resize', updateNaturalHeight)
-
-    return () => {
-      resizeObserver.disconnect()
-      window.removeEventListener('resize', updateNaturalHeight)
-    }
-  }, [isHeroDocked, content.locale, isLogoStoryRevealed])
-
   const languageSwitcher = content.ui?.languageSwitcher || {}
   const commandNavigatorUi = content.ui?.commandNavigator || {}
   const logoUi = content.ui?.logo || {}
   const logoStory = content.ui?.logoStory || {}
   const shellFrameUi = content.ui?.shellFrame || {}
   const projectLabels = content.ui?.projects || {}
-
-  const renderHeroPanel = () => (
-    <div className="hero-panel">
-      <div className="hero-panel__content">
-        <p className="hero-panel__role">{content.profile.role}</p>
-        <h1>{content.profile.name}</h1>
-        <p className="hero-panel__tagline">{content.profile.tagline}</p>
-      </div>
-
-      <div className={`hero-panel__logo ${isLogoStoryRevealed ? 'is-story-open' : ''}`}>
-        <button
-          type="button"
-          className={`hero-logo-secret ${isLogoStoryRevealed ? 'is-revealed' : ''}`}
-          aria-label={isLogoStoryOpen ? logoStory.hideAriaLabel : logoStory.openAriaLabel}
-          onClick={onLogoSecretClick}
-        >
-          <div className="hero-logo-secret__inner">
-            <div className="hero-logo-secret__face hero-logo-secret__face--front">
-              <TerminalLogo ariaLabel={logoUi.ariaLabel} params={logoUi.params} />
-            </div>
-            <div className="hero-logo-secret__face hero-logo-secret__face--back">
-              <span className="hero-logo-secret__title">{logoStory.title}</span>
-              <span className="hero-logo-secret__body">{logoStory.body}</span>
-            </div>
-          </div>
-        </button>
-      </div>
-
-      <ul className="hero-panel__meta">
-        <li>{content.profile.location}</li>
-        <li>{content.profile.availability}</li>
-      </ul>
-    </div>
-  )
 
   return (
     <div className="terminal-page">
@@ -234,15 +101,38 @@ function App() {
       </div>
 
       <main className="terminal-layout">
-        {isHeroDocked ? (
-          <div className="hero-shell-spacer" style={{ height: `${heroPlaceholderHeight}px` }} aria-hidden="true" />
-        ) : null}
+        <header className="hero">
+          <div className="hero__content">
+            <p className="hero__role">{content.profile.role}</p>
+            <h1>{content.profile.name}</h1>
+            <p className="hero__tagline">{content.profile.tagline}</p>
+            <p className="hero__meta">
+              <span>{content.profile.location}</span>
+              <span className="hero__meta-sep" aria-hidden="true">
+                ·
+              </span>
+              <span className="hero__availability">{content.profile.availability}</span>
+            </p>
+          </div>
 
-        <header
-          ref={heroShellRef}
-          className={`hero-shell ${isHeroDocked ? 'hero-shell--floating hero-shell--docked' : ''}`}
-        >
-          {renderHeroPanel()}
+          <div className={`hero__logo ${isLogoStoryOpen ? 'is-story-open' : ''}`}>
+            <button
+              type="button"
+              className={`hero-logo-secret ${isLogoStoryOpen ? 'is-revealed' : ''}`}
+              aria-label={isLogoStoryOpen ? logoStory.hideAriaLabel : logoStory.openAriaLabel}
+              onClick={onLogoSecretClick}
+            >
+              <div className="hero-logo-secret__inner">
+                <div className="hero-logo-secret__face hero-logo-secret__face--front">
+                  <TerminalLogo ariaLabel={logoUi.ariaLabel} params={logoUi.params} />
+                </div>
+                <div className="hero-logo-secret__face hero-logo-secret__face--back">
+                  <span className="hero-logo-secret__title">{logoStory.title}</span>
+                  <span className="hero-logo-secret__body">{logoStory.body}</span>
+                </div>
+              </div>
+            </button>
+          </div>
         </header>
 
         <ShellFrame title={content.shell.title} ui={shellFrameUi}>
@@ -265,17 +155,21 @@ function App() {
           </div>
         </ShellFrame>
 
-        <ShellFrame title={content.projectsSection.titleCommand} ui={shellFrameUi}>
-          <ProjectsGrid
-            description={content.projectsSection.description}
-            projects={content.projects}
-            labels={projectLabels}
-          />
-        </ShellFrame>
+        <div className="page-section">
+          <ShellFrame title={content.projectsSection.titleCommand} ui={shellFrameUi}>
+            <ProjectsGrid
+              description={content.projectsSection.description}
+              projects={content.projects}
+              labels={projectLabels}
+            />
+          </ShellFrame>
+        </div>
 
-        <ShellFrame title={content.contactSection.titleCommand} ui={shellFrameUi}>
-          <ContactPanel note={content.contactSection.note} contacts={content.contact} />
-        </ShellFrame>
+        <div className="page-section">
+          <ShellFrame title={content.contactSection.titleCommand} ui={shellFrameUi}>
+            <ContactPanel note={content.contactSection.note} contacts={content.contact} />
+          </ShellFrame>
+        </div>
 
         <footer className="footer-note">{content.footer}</footer>
       </main>

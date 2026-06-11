@@ -13,9 +13,7 @@ export function ProjectsGrid({ description, projects, labels }) {
               className={`project-card__media-shell ${project.image ? 'has-image' : 'is-empty'}`}
               style={project.image ? { '--project-image': `url(${project.image})` } : undefined}
               aria-hidden="true"
-            >
-              <span className="project-card__media-fx" />
-            </div>
+            />
 
             <div className="project-card__header">
               <h3>{project.name}</h3>

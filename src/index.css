@@ -1,22 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --bg: #050911;
-  --panel-shadow: 0 18px 55px rgba(0, 0, 0, 0.38);
-  --border: #213246;
-  --text-base: #ecf5ff;
-  --text-soft: #90a7bf;
-  --accent: #56f3a7;
-  --accent-alt: #ffb35a;
+  --bg: #08090b;
+  --panel: #0e1014;
+  --panel-soft: #121419;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text-base: #e9ecef;
+  --text-soft: #8f98a3;
+  --text-faint: #5d656f;
+  --accent: #45d29b;
+  --accent-soft: rgba(69, 210, 155, 0.12);
+  --panel-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 60px rgba(0, 0, 0, 0.35);
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --sans: 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
 
-  font-family: 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
+  font-family: var(--sans);
   color: var(--text-base);
   background: var(--bg);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis: none;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 * {
@@ -27,24 +33,8 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 12% 5%, rgba(86, 243, 167, 0.17), transparent 38%),
-    radial-gradient(circle at 90% 12%, rgba(255, 179, 90, 0.19), transparent 40%),
-    linear-gradient(180deg, #060b15, #04070f 45%, #050911);
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.16;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.12),
-    rgba(255, 255, 255, 0.12) 1px,
-    transparent 1px,
-    transparent 3px
-  );
+    radial-gradient(60rem 28rem at 50% -8rem, rgba(69, 210, 155, 0.06), transparent 70%),
+    var(--bg);
 }
 
 #root {
@@ -56,5 +46,10 @@ h2,
 h3 {
   margin: 0;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: rgba(69, 210, 155, 0.28);
+  color: #f2fbf7;
 }

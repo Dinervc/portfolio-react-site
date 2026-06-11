@@ -24,8 +24,8 @@
     "logoStory": {
       "openAriaLabel": "Logo-Story öffnen",
       "hideAriaLabel": "Logo-Story ausblenden",
-      "title": "Easter Egg gefunden!",
-      "body": "Dieses Zeichen verbindet meine Initialen mit der 2-8-3-Orbitstruktur von Aluminium. Der metallische Look steht für meinen Fokus auf effiziente, elegante und hochwertige Produktarbeit."
+      "title": "Das Zeichen",
+      "body": "Meine Initialen in den 2-8-3-Elektronenschalen von Aluminium — Element 13: leicht, beständig, präzise. Das ist der Anspruch an alles, was ich baue."
     },
     "shellFrame": {
       "statusLive": "AKT",
@@ -38,10 +38,10 @@
       "openPopupAriaLabel": "Popup-Modus öffnen",
       "exitPopupAriaLabel": "Popup-Modus verlassen",
       "redMessages": [
-        "Netter Versuch.",
-        "Du kannst mich nicht löschen.",
-        "Immer noch nicht löschbar.",
-        "Ausdauer erkannt."
+        "kill: Vorgang nicht erlaubt",
+        "kill -9: Vorgang nicht erlaubt",
+        "Prozess ist unsterblich",
+        "okay, du kannst jetzt aufhören"
       ]
     },
     "projects": {

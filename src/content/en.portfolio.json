@@ -24,8 +24,8 @@
     "logoStory": {
       "openAriaLabel": "Open logo story",
       "hideAriaLabel": "Hide logo story",
-      "title": "Easter Egg found!",
-      "body": "This mark blends my initials with aluminum's 2-8-3 orbit structure. The metallic look reflects my focus on efficient, elegant, high-quality product craftsmanship."
+      "title": "The mark",
+      "body": "My initials, set inside aluminium's 2-8-3 electron shells — element 13: light, durable, precise. That's the bar for the things I build."
     },
     "shellFrame": {
       "statusLive": "LIVE",
@@ -38,10 +38,10 @@
       "openPopupAriaLabel": "Open popup mode",
       "exitPopupAriaLabel": "Exit popup mode",
       "redMessages": [
-        "Nice try.",
-        "You can't delete me.",
-        "Still not deletable.",
-        "Persistence detected."
+        "kill: operation not permitted",
+        "kill -9: operation not permitted",
+        "process is immortal",
+        "ok, you can stop now"
       ]
     },
     "projects": {

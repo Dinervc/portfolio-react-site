@@ -147,7 +147,6 @@ export function TerminalLogo({ ariaLabel, params, style }) {
           ))}
         </g>
       </svg>
-      <span className="terminal-logo__scanline" aria-hidden="true" />
     </div>
   )
 }
