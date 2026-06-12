@@ -1,5 +1,6 @@
 import dePortfolioContent from '../content/de.portfolio.json'
 import enPortfolioContent from '../content/en.portfolio.json'
+import sharedProjects from '../content/projects.json'
 
 export const DEFAULT_LOCALE = 'en'
 
@@ -37,6 +38,7 @@ const emptySection = {
   shell: {},
   commands: [],
   projectsSection: {},
+  projectCopy: {},
   projects: [],
   contactSection: {},
   contact: [],
@@ -59,7 +61,7 @@ function sortProjects(projects, locale) {
     const scoreB = normalizeProudnessScore(b?.proudnessScore)
 
     if (scoreA !== scoreB) {
-      return scoreA - scoreB
+      return scoreB - scoreA
     }
 
     const nameA = typeof a?.name === 'string' ? a.name : ''
@@ -72,10 +74,25 @@ function sortProjects(projects, locale) {
   })
 }
 
+function mergeProjects(projectCopy) {
+  const copyById =
+    projectCopy && typeof projectCopy === 'object' && !Array.isArray(projectCopy) ? projectCopy : {}
+
+  return sharedProjects.map((project) => {
+    const localized = copyById[project.id] ?? {}
+
+    return {
+      ...project,
+      name: typeof localized.name === 'string' ? localized.name : project.id,
+      description: typeof localized.description === 'string' ? localized.description : '',
+    }
+  })
+}
+
 export function getPortfolioContent(locale = DEFAULT_LOCALE) {
   const resolvedLocale = resolveLocale(locale)
   const rawContent = CONTENT_BY_LOCALE[resolvedLocale] ?? enPortfolioContent
-  const projects = Array.isArray(rawContent.projects) ? rawContent.projects : []
+  const projects = mergeProjects(rawContent.projectCopy)
 
   return {
     ...emptySection,

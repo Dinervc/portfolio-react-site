@@ -41,6 +41,7 @@ Main content sources:
 
 - `src/content/en.portfolio.json`
 - `src/content/de.portfolio.json`
+- `src/content/projects.json` (shared project data)
 
 Important sections in each locale JSON:
 
@@ -48,9 +49,16 @@ Important sections in each locale JSON:
 - `shell`: terminal window title + boot lines
 - `commands`: command list and output blocks
 - `projectsSection`: projects heading text
-- `projects`: project cards and links
+- `projectCopy`: localized project names and descriptions, keyed by project `id`
 - `contactSection` / `contact`: contact panel
 - `footer`: footer note
+
+Shared project fields live in `src/content/projects.json`:
+
+- `id`: stable identifier used to join locale copy (not shown in the UI)
+- `year`, `stack`, `image`, `links`, `proudnessScore`
+
+Each locale file only overrides `name` and `description` per id in `projectCopy`.
 
 Language-specific UI strings are grouped under `ui` (labels, aria text, shell controls, and button text).
 
@@ -68,7 +76,7 @@ Images should exist in:
 
 Projects are sorted in `src/lib/getPortfolioContent.js` using `proudnessScore`:
 
-- Ascending by score (smaller score appears first)
+- Descending by score (highest score appears first)
 - Scores below `1` are normalized to the same top level (`0`)
 - Projects with the same normalized score are sorted alphabetically by name
 

@@ -132,15 +132,14 @@
       "description": "A few notable projects from my portfolio.",
       "output": [
         "HilRes: strong technical depth in HIL resource management with TDD.",
-        "Reflectory: Hack United 2023 winner (Best Solo Hack).",
-        "RegBankSight and MessageLogger reflect recent Python GUI work with many features and polish.",
-        "Projects below are ordered by proudness score and then alphabetically."
+        "MessageLogger: showcases recent Python GUI work with many features and polish.",
+        "RegBankSight: first Python GUI project, evolved from a simple register viewer into a comprehensive tool with many features and polish.",
+        "Projects below are ordered by proudness score (highest first) and then alphabetically."
       ],
       "tags": [
         "HilRes",
-        "Reflectory",
-        "RegBankSight",
-        "MessageLogger"
+        "MessageLogger",
+        "RegBankSight"
       ]
     },
     {
@@ -164,260 +163,76 @@
     "titleCommand": "ls projects/",
     "description": "Projects spanning apprenticeship work, hackathons, and side builds."
   },
-  "projects": [
-    {
+  "projectCopy": {
+    "hilres": {
       "name": "IPA/LAP: HilRes (Grade 5.5)",
-      "year": "2025",
-      "description": "Python module for managing Hardware-In-the-Loop resources to run tests in parallel with an extensible architecture and TDD workflow.",
-      "stack": [
-        "Python",
-        "HIL",
-        "TDD"
-      ],
-      "image": "",
-      "links": {
-        "open": "",
-        "code": ""
-      },
-      "proudnessScore": 1
+      "description": "Python module for managing Hardware-In-the-Loop resources to run tests in parallel with an extensible architecture and TDD workflow."
     },
-    {
+    "portfolio-website": {
       "name": "New Portfolio Website",
-      "year": "2026",
-      "description": "This portfolio website with a terminal-inspired interface, animated custom logo system, and structured content architecture.",
-      "stack": [
-        "React",
-        "Vite",
-        "CSS"
-      ],
-      "image": "/project-images/ap_logo.webp",
-      "links": {
-        "open": "",
-        "code": "https://github.com/Dinervc/portfolio-react-site"
-      },
-      "proudnessScore": 3
+      "description": "This portfolio website with a terminal-inspired interface, animated custom logo system, and structured content architecture."
     },
-    {
+    "idpa-staubli-chatgpt": {
       "name": "IDPA - Staubli ChatGPT (Grade 5.5)",
-      "year": "2024",
-      "description": "Interdisciplinary apprenticeship project analyzing Staubli's in-house chatbot via interviews, surveys, and usage data to produce recommendations.",
-      "stack": [
-        "Research",
-        "Data Analysis",
-        "Reporting"
-      ],
-      "image": "/project-images/staublichatgpt-q_gI6bdk.png",
-      "links": {
-        "open": "",
-        "code": ""
-      },
-      "proudnessScore": 1
+      "description": "Interdisciplinary apprenticeship project analyzing Staubli's in-house chatbot via interviews, surveys, and usage data to produce recommendations."
     },
-    {
+    "regbanksight": {
       "name": "RegBankSight",
-      "year": "2024",
-      "description": "Application to visualize FPGA register banks in a tree structure with UART-based read/write access down to field level.",
-      "stack": [
-        "Python",
-        "XML",
-        "UART",
-        "FPGA"
-      ],
-      "image": "/project-images/regbanksight-D_SKf5cI.png",
-      "links": {
-        "open": "",
-        "code": ""
-      },
-      "proudnessScore": 2
+      "description": "Application to visualize FPGA register banks in a tree structure with UART-based read/write access down to field level."
     },
-    {
+    "circleviz": {
       "name": "CircleViz",
-      "year": "",
-      "description": "Python script that generates circle comparison diagrams inspired by popular AI model visual benchmarks.",
-      "stack": [
-        "Python",
-        "Matplotlib"
-      ],
-      "image": "/project-images/circleviz-BIKgNAsq.svg",
-      "links": {
-        "open": "",
-        "code": ""
-      },
-      "proudnessScore": 4
+      "description": "Python script that generates circle comparison diagrams inspired by popular AI model visual benchmarks."
     },
-    {
+    "ai-arcade": {
       "name": "AI Arcade",
-      "year": "2025",
-      "description": "Platform for AI-generated games with a library of 16 experiences ranging from simple skill games to complex 3D gameplay.",
-      "stack": [
-        "Web",
-        "AI Prototyping"
-      ],
-      "image": "/project-images/aiarcade-CDt0LadL.png",
-      "links": {
-        "open": "https://www.dinervc.ch/arcade",
-        "code": "https://github.com/Dinervc/ai_arcade"
-      },
-      "proudnessScore": 5
+      "description": "Platform for AI-generated games with a library of 16 experiences ranging from simple skill games to complex 3D gameplay."
     },
-    {
+    "sharctestrunner": {
       "name": "SharcTestRunner",
-      "year": "2025/2026",
-      "description": "Model-based test execution framework for HIL systems, including model import, Python conversion, execution, and issue reporting.",
-      "stack": [
-        "Python",
-        "HIL",
-        "Model-Based Testing"
-      ],
-      "image": "",
-      "links": {
-        "open": "",
-        "code": ""
-      },
-      "proudnessScore": 2
+      "description": "Model-based test execution framework for HIL systems, including model import, Python conversion, execution, and issue reporting."
     },
-    {
+    "tiktaktoe": {
       "name": "TikTakToe (Grade 5.5)",
-      "year": "2024",
-      "description": "TikTok-style social media clone built during apprenticeship with Swift and Firebase as a proof of full-featured mobile delivery.",
-      "stack": [
-        "Swift",
-        "Firebase",
-        "Mobile"
-      ],
-      "image": "",
-      "links": {
-        "open": "",
-        "code": ""
-      },
-      "proudnessScore": 2
+      "description": "TikTok-style social media clone built during apprenticeship with Swift and Firebase as a proof of full-featured mobile delivery."
     },
-    {
+    "cool-encryption-tool": {
       "name": "Cool Encryption Tool",
-      "year": "2023",
-      "description": "Python Tkinter desktop app for file encryption/decryption created as a school project.",
-      "stack": [
-        "Python",
-        "Tkinter",
-        "Desktop"
-      ],
-      "image": "/project-images/coolencryptiontool-CiOOV-be.png",
-      "links": {
-        "open": "",
-        "code": "https://github.com/Dinervc/Cool-Encryption-Tool"
-      },
-      "proudnessScore": 5
+      "description": "Python Tkinter desktop app for file encryption/decryption created as a school project."
     },
-    {
+    "dinervc-lab": {
       "name": "Dinervc Lab",
-      "year": "2023",
-      "description": "Portfolio experiment in Vue.js that demonstrated adaptability and quick learning in an unfamiliar framework.",
-      "stack": [
-        "Vue.js",
-        "Web"
-      ],
-      "image": "/project-images/dinervclab-IqEgXtSS.png",
-      "links": {
-        "open": "https://www.dinervc.ch/",
-        "code": "https://github.com/Dinervc/Dinervc-Lab"
-      },
-      "proudnessScore": 4
+      "description": "Portfolio experiment in Vue.js that demonstrated adaptability and quick learning in an unfamiliar framework."
     },
-    {
+    "viewpeakclips": {
       "name": "ViewPeakClips",
-      "year": "2024",
-      "description": "Tool for splitting long videos into social-ready clips with management and upload workflows.",
-      "stack": [
-        "Web",
-        "Automation",
-        "Media"
-      ],
-      "image": "",
-      "links": {
-        "open": "",
-        "code": ""
-      },
-      "proudnessScore": 4
+      "description": "Tool for splitting long videos into social-ready clips with management and upload workflows."
     },
-    {
+    "reflectory": {
       "name": "Reflectory (Hackathon Winner)",
-      "year": "2023",
-      "description": "AI-powered mental health app built from scratch over one weekend, winning Best Solo Hack at Hack United 2023.",
-      "stack": [
-        "AI",
-        "Rapid Prototyping",
-        "Product"
-      ],
-      "image": "/project-images/certificate-NE65ZW3R.png",
-      "links": {
-        "open": "",
-        "code": "https://github.com/Dinervc/Reflectory"
-      },
-      "proudnessScore": 2
+      "description": "AI-powered mental health app built from scratch over one weekend, winning Best Solo Hack at Hack United 2023."
     },
-    {
+    "dice-dash": {
       "name": "Dice Dash",
-      "year": "2023",
-      "description": "Pig Dice-inspired browser game with multiplayer mode, strong AI opponent, custom settings, and immersive audio.",
-      "stack": [
-        "Game Dev",
-        "JavaScript"
-      ],
-      "image": "/project-images/dicedash-BhiWuvh0.png",
-      "links": {
-        "open": "https://www.dinervc.ch/DiceDash/index.html",
-        "code": "https://github.com/Dinervc/DiceDash"
-      },
-      "proudnessScore": 3
+      "description": "Pig Dice-inspired browser game with multiplayer mode, strong AI opponent, custom settings, and immersive audio."
     },
-    {
+    "webglide": {
       "name": "Webglide",
-      "year": "",
-      "description": "Prompt-driven website generation concept created for startup exploration and school presentation work.",
-      "stack": [
-        "Web",
-        "GPT",
-        "Startup Prototype"
-      ],
-      "image": "",
-      "links": {
-        "open": "",
-        "code": ""
-      },
-      "proudnessScore": 4
+      "description": "Prompt-driven website generation concept created for startup exploration and school presentation work."
     },
-    {
+    "slitherscript": {
       "name": "SlitherScript",
-      "year": "2023",
-      "description": "Snake game variant with power-ups, dynamic walls, and tunable difficulty for varied gameplay sessions.",
-      "stack": [
-        "JavaScript",
-        "Game Dev"
-      ],
-      "image": "/project-images/slitherscript-q1Bf--zq.png",
-      "links": {
-        "open": "https://www.dinervc.ch/SlitherScript/index.html",
-        "code": "https://github.com/Dinervc/SlitherScript"
-      },
-      "proudnessScore": 4
+      "description": "Snake game variant with power-ups, dynamic walls, and tunable difficulty for varied gameplay sessions."
     },
-    {
+    "demmin-reading-journal": {
       "name": "Die Gespenster von Demmin Reading Journal",
-      "year": "",
-      "description": "HTML/CSS reading journal concept with custom typography and visual design built for a school assignment.",
-      "stack": [
-        "HTML",
-        "CSS",
-        "Design"
-      ],
-      "image": "/project-images/lesejournal-D5Jcz4sw.png",
-      "links": {
-        "open": "https://www.dinervc.ch/LeseJournal/index.html",
-        "code": "https://github.com/Dinervc/Die-Gespenster-von-Demmin-Lesejournal"
-      },
-      "proudnessScore": 5
+      "description": "HTML/CSS reading journal concept with custom typography and visual design built for a school assignment."
+    },
+    "messagelogger": {
+      "name": "MessageLogger",
+      "description": "Desktop app to visualize machine command logs as sequence diagrams, timing diagrams with message relations for pattern discovery, or sortable tables. With in-app log fetching from custom Staubli hardware via an internally generated Python commands interface."
     }
-  ],
+  },
   "contactSection": {
     "titleCommand": "cat contact.json",
     "note": "Feel free to reach out through any channel below."

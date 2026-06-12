@@ -1,0 +1,153 @@
+[
+  {
+    "id": "hilres",
+    "year": "2025",
+    "stack": ["Python", "HIL", "TDD"],
+    "image": "",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 5
+  },
+  {
+    "id": "portfolio-website",
+    "year": "2026",
+    "stack": ["React", "Vite", "CSS"],
+    "image": "/project-images/ap_logo.webp",
+    "links": { "open": "", "code": "https://github.com/Dinervc/portfolio-react-site" },
+    "proudnessScore": 4
+  },
+  {
+    "id": "idpa-staubli-chatgpt",
+    "year": "2024",
+    "stack": ["Research", "Data Analysis", "Reporting"],
+    "image": "/project-images/staublichatgpt-q_gI6bdk.png",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 5
+  },
+  {
+    "id": "regbanksight",
+    "year": "2024",
+    "stack": ["Python", "XML", "UART", "FPGA"],
+    "image": "/project-images/regbanksight-D_SKf5cI.png",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 4
+  },
+  {
+    "id": "circleviz",
+    "year": "",
+    "stack": ["Python", "Matplotlib"],
+    "image": "/project-images/circleviz-BIKgNAsq.svg",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 2
+  },
+  {
+    "id": "ai-arcade",
+    "year": "2025",
+    "stack": ["Web", "AI Prototyping"],
+    "image": "/project-images/aiarcade-CDt0LadL.png",
+    "links": {
+      "open": "https://www.dinervc.ch/arcade",
+      "code": "https://github.com/Dinervc/ai_arcade"
+    },
+    "proudnessScore": 2
+  },
+  {
+    "id": "sharctestrunner",
+    "year": "2025/2026",
+    "stack": ["Python", "HIL", "Model-Based Testing"],
+    "image": "",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 4
+  },
+  {
+    "id": "tiktaktoe",
+    "year": "2024",
+    "stack": ["Swift", "Firebase", "Mobile"],
+    "image": "",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 2
+  },
+  {
+    "id": "cool-encryption-tool",
+    "year": "2023",
+    "stack": ["Python", "Tkinter", "Desktop"],
+    "image": "/project-images/coolencryptiontool-CiOOV-be.png",
+    "links": { "open": "", "code": "https://github.com/Dinervc/Cool-Encryption-Tool" },
+    "proudnessScore": 2
+  },
+  {
+    "id": "dinervc-lab",
+    "year": "2023",
+    "stack": ["Vue.js", "Web"],
+    "image": "/project-images/dinervclab-IqEgXtSS.png",
+    "links": {
+      "open": "https://www.dinervc.ch/",
+      "code": "https://github.com/Dinervc/Dinervc-Lab"
+    },
+    "proudnessScore": 3
+  },
+  {
+    "id": "viewpeakclips",
+    "year": "2024",
+    "stack": ["Web", "Automation", "Media"],
+    "image": "",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 4
+  },
+  {
+    "id": "reflectory",
+    "year": "2023",
+    "stack": ["AI", "Rapid Prototyping", "Product"],
+    "image": "/project-images/certificate-NE65ZW3R.png",
+    "links": { "open": "", "code": "https://github.com/Dinervc/Reflectory" },
+    "proudnessScore": 4
+  },
+  {
+    "id": "dice-dash",
+    "year": "2023",
+    "stack": ["Game Dev", "JavaScript"],
+    "image": "/project-images/dicedash-BhiWuvh0.png",
+    "links": {
+      "open": "https://www.dinervc.ch/DiceDash/index.html",
+      "code": "https://github.com/Dinervc/DiceDash"
+    },
+    "proudnessScore": 5
+  },
+  {
+    "id": "webglide",
+    "year": "",
+    "stack": ["Web", "GPT", "Startup Prototype"],
+    "image": "",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 3
+  },
+  {
+    "id": "slitherscript",
+    "year": "2023",
+    "stack": ["JavaScript", "Game Dev"],
+    "image": "/project-images/slitherscript-q1Bf--zq.png",
+    "links": {
+      "open": "https://www.dinervc.ch/SlitherScript/index.html",
+      "code": "https://github.com/Dinervc/SlitherScript"
+    },
+    "proudnessScore": 3
+  },
+  {
+    "id": "demmin-reading-journal",
+    "year": "",
+    "stack": ["HTML", "CSS", "Design"],
+    "image": "/project-images/lesejournal-D5Jcz4sw.png",
+    "links": {
+      "open": "https://www.dinervc.ch/LeseJournal/index.html",
+      "code": "https://github.com/Dinervc/Die-Gespenster-von-Demmin-Lesejournal"
+    },
+    "proudnessScore": 3
+  },
+  {
+    "id": "messagelogger",
+    "year": "2025/2026",
+    "stack": ["Python", "GUI", "HIL", "Visualization"],
+    "image": "/project-images/messagelogger-screenshot.png",
+    "links": { "open": "", "code": "" },
+    "proudnessScore": 6
+  }
+]

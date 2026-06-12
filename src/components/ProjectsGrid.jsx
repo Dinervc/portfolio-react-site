@@ -8,7 +8,7 @@ export function ProjectsGrid({ description, projects, labels }) {
       <p className="projects-panel__description">{description}</p>
       <div className="projects-grid">
         {projects.map((project) => (
-          <article key={project.name} className="project-card">
+          <article key={project.id} className="project-card">
             <div
               className={`project-card__media-shell ${project.image ? 'has-image' : 'is-empty'}`}
               style={project.image ? { '--project-image': `url(${project.image})` } : undefined}
@@ -22,7 +22,7 @@ export function ProjectsGrid({ description, projects, labels }) {
             <p>{project.description}</p>
             <ul className="stack-list">
               {project.stack?.map((stackItem) => (
-                <li key={`${project.name}-${stackItem}`}>{stackItem}</li>
+                <li key={`${project.id}-${stackItem}`}>{stackItem}</li>
               ))}
             </ul>
 
